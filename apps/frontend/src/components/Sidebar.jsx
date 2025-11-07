@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
+import Logo from './Logo'
 
 const Sidebar = () => {
   const { user } = useAuth()
@@ -176,16 +177,15 @@ const Sidebar = () => {
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="flex-1 flex flex-col min-h-0 bg-gray-800">
         <div className="flex items-center h-16 flex-shrink-0 px-4 bg-gray-900">
-          <div className="flex items-center">
-            <div className="flex-shrink-0 h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <h1 className="text-white text-lg font-semibold">Mastersolis Infotech</h1>
-            </div>
-          </div>
+          <Logo 
+            size="sm" 
+            href={user?.role === 'ADMIN' ? '/admin' : 
+                  user?.role === 'HR' ? '/hr' :
+                  user?.role === 'MANAGER' ? '/manager' : '/dashboard'} 
+            showText={true} 
+            variant="white"
+            className="cursor-pointer"
+          />
         </div>
         
         <div className="flex-1 flex flex-col overflow-y-auto">

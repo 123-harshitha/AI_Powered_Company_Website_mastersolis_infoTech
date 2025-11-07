@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import Chatbot from '../components/Chatbot';
 import PageTransition from '../components/PageTransition';
 
 const WhoWeServe = () => {
@@ -158,95 +160,99 @@ const WhoWeServe = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section */}
-        <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-white rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-            <div className="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full translate-x-1/2 translate-y-1/2 blur-3xl"></div>
-          </div>
+        <NavBar />
+        <main className="relative pt-32">
+          {/* Hero Section */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800">
+            <div className="max-w-7xl mx-auto text-center">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="inline-block bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-6"
+              >
+                Who We Serve
+              </motion.div>
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              >
+                Empowering Every Industry with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-purple-300">Intelligent HR Solutions</span>
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed"
+              >
+                At Mastersolis Infotech, we empower organizations of all sizes — from startups to global enterprises — with tailored Human Resource Management solutions. Our platform adapts to your industry's unique needs, compliance standards, and workforce challenges.
+              </motion.p>
+            </div>
+          </section>
 
-          <div className="relative max-w-7xl mx-auto text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
-            >
-              Empowering Every Industry with Intelligent HR Solutions
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed"
-            >
-              At Mastersolis Infotech, we empower organizations of all sizes — from startups to global enterprises — with tailored Human Resource Management solutions. Our platform adapts to your industry's unique needs, compliance standards, and workforce challenges to help you thrive in a digital world.
-            </motion.p>
-          </div>
-        </section>
+          {/* Statistics Section */}
+          <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-6"
+              >
+                {[
+                  { number: '500+', label: 'Organizations Served', icon: '🏢' },
+                  { number: '50K+', label: 'Employees Managed', icon: '👥' },
+                  { number: '14', label: 'Industries Covered', icon: '🌐' },
+                  { number: '99.9%', label: 'Uptime Guarantee', icon: '⚡' }
+                ].map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="text-center"
+                  >
+                    <div className="text-4xl mb-2">{stat.icon}</div>
+                    <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-1">{stat.number}</div>
+                    <div className="text-sm md:text-base text-gray-600 font-medium">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+          </section>
 
-        {/* Statistics Section */}
-        <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8"
-            >
-              {[
-                { number: '500+', label: 'Organizations Served', icon: '🏢' },
-                { number: '50K+', label: 'Employees Managed', icon: '👥' },
-                { number: '14', label: 'Industries Covered', icon: '🌐' },
-                { number: '99.9%', label: 'Uptime Guarantee', icon: '⚡' }
-              ].map((stat, index) => (
-            <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="text-center"
-                >
-                  <div className="text-5xl mb-3">{stat.icon}</div>
-                  <div className="text-4xl md:text-5xl font-bold text-blue-600 mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+          {/* Industries Grid Section */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Industries We Serve
+                </h2>
+                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+                  Discover how Mastersolis Infotech transforms workforce management across diverse sectors
+                </p>
+                <p className="text-base text-gray-500 max-w-2xl mx-auto">
+                  Our platform is designed to adapt to the unique requirements, compliance standards, and operational challenges of each industry.
+                </p>
+              </motion.div>
 
-        {/* Industries Grid Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Industries We Serve
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-                Discover how Mastersolis Infotech transforms workforce management across diverse sectors
-              </p>
-              <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                Our platform is designed to adapt to the unique requirements, compliance standards, and operational challenges of each industry, ensuring seamless integration with your existing workflows.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            >
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              >
               {industries.map((industry) => (
                 <motion.div
                   key={industry.id}
@@ -257,7 +263,7 @@ const WhoWeServe = () => {
                   {/* Gradient Background */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${industry.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
                   
-                  <div className="relative p-8">
+                  <div className="relative p-6">
                     {/* Icon */}
                     <div className="mb-6">
                       <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br ${industry.gradient} text-white shadow-lg group-hover:scale-110 transition-transform duration-300`}>
@@ -269,15 +275,15 @@ const WhoWeServe = () => {
                     </div>
 
                     {/* Content */}
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                       {industry.name}
                     </h3>
                     
-                    <p className="text-blue-600 font-semibold text-sm mb-4">
+                    <p className="text-blue-600 font-semibold text-xs mb-3">
                       {industry.tagline}
                     </p>
                     
-                    <p className="text-gray-600 leading-relaxed mb-6">
+                    <p className="text-sm text-gray-600 leading-relaxed mb-4">
                       {industry.description}
                     </p>
 
@@ -307,29 +313,29 @@ const WhoWeServe = () => {
                   <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${industry.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300`}></div>
                 </motion.div>
               ))}
-            </motion.div>
-          </div>
-        </section>
+              </motion.div>
+            </div>
+          </section>
 
-        {/* Benefits Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Why Industries Choose Mastersolis Infotech
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Comprehensive solutions designed to meet the unique needs of every sector
-              </p>
-            </motion.div>
+          {/* Benefits Section */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Why Industries Choose Mastersolis Infotech
+                </h2>
+                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                  Comprehensive solutions designed to meet the unique needs of every sector
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
                 {
                   icon: '🔒',
@@ -383,36 +389,36 @@ const WhoWeServe = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 border border-blue-100"
+                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 hover:shadow-lg transition-all duration-300 border border-blue-100"
                 >
-                  <div className="text-4xl mb-4">{benefit.icon}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{benefit.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{benefit.description}</p>
+                  <div className="text-3xl mb-3">{benefit.icon}</div>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{benefit.title}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed">{benefit.description}</p>
                 </motion.div>
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Industry-Specific Features */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Industry-Specific Features
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Specialized modules and features designed for your industry's unique requirements
-              </p>
-            </motion.div>
+          {/* Industry-Specific Features */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-50 to-blue-50">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Industry-Specific Features
+                </h2>
+                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                  Specialized modules and features designed for your industry's unique requirements
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {[
                 {
                   industry: 'Healthcare',
@@ -461,9 +467,9 @@ const WhoWeServe = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
+                  className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
                 >
-                  <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-3">
                     <span className="text-3xl">
                       {item.industry === 'Healthcare' && '🏥'}
                       {item.industry === 'Finance & Banking' && '💰'}
@@ -482,29 +488,29 @@ const WhoWeServe = () => {
                   </ul>
                 </motion.div>
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Success Stories / Testimonials */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Success Stories Across Industries
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                See how organizations in your industry have transformed their HR operations
-              </p>
-            </motion.div>
+          {/* Success Stories / Testimonials */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Success Stories Across Industries
+                </h2>
+                <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                  See how organizations in your industry have transformed their HR operations
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 {
                   industry: 'Technology',
@@ -537,15 +543,15 @@ const WhoWeServe = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border border-blue-100"
+                  className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100"
                 >
-                  <div className="mb-4">
-                    <span className="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-semibold rounded-full">
+                  <div className="mb-3">
+                    <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full">
                       {story.industry}
                     </span>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{story.company}</h3>
-                  <p className="text-gray-700 italic mb-6 leading-relaxed">"{story.quote}"</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{story.company}</h3>
+                  <p className="text-sm text-gray-700 italic mb-4 leading-relaxed">"{story.quote}"</p>
                   <div className="border-t border-gray-200 pt-4">
                     <p className="font-semibold text-gray-900">{story.author}</p>
                     <p className="text-sm text-gray-600">{story.role}</p>
@@ -553,29 +559,29 @@ const WhoWeServe = () => {
                   </div>
                 </motion.div>
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Implementation & Support */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 text-white">
-          <div className="max-w-7xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Implementation & Support
-              </h2>
-              <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-                We're with you every step of the way, from initial setup to ongoing optimization
-              </p>
-            </motion.div>
+          {/* Implementation & Support */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800 text-white">
+            <div className="max-w-7xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-center mb-12"
+              >
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                  Implementation & Support
+                </h2>
+                <p className="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto">
+                  We're with you every step of the way, from initial setup to ongoing optimization
+                </p>
+              </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 {
                   step: '01',
@@ -604,38 +610,38 @@ const WhoWeServe = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+                  className="bg-white/10 backdrop-blur-lg rounded-2xl p-5 border border-white/20"
                 >
-                  <div className="text-5xl font-bold text-blue-200 mb-4">{item.step}</div>
-                  <h3 className="text-xl font-bold mb-3">{item.title}</h3>
-                  <p className="text-blue-100 leading-relaxed">{item.description}</p>
+                  <div className="text-4xl font-bold text-blue-200 mb-3">{item.step}</div>
+                  <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-blue-100 leading-relaxed">{item.description}</p>
                 </motion.div>
               ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* CTA Section */}
-        <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-bold text-white mb-6"
-            >
-              Ready to Transform Your HR Operations?
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-blue-100 mb-8"
-            >
-              Join thousands of organizations that trust Mastersolis Infotech to streamline their workforce management. Get started with a free consultation today.
-            </motion.p>
+          {/* CTA Section */}
+          <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-600 via-indigo-700 to-purple-800">
+            <div className="max-w-4xl mx-auto text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="text-3xl md:text-4xl font-bold text-white mb-4"
+              >
+                Ready to Transform Your HR Operations?
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-lg md:text-xl text-blue-100 mb-6"
+              >
+                Join thousands of organizations that trust Mastersolis Infotech to streamline their workforce management. Get started with a free consultation today.
+              </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -645,19 +651,19 @@ const WhoWeServe = () => {
             >
               <Link
                 to="/contact"
-                className="px-8 py-4 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+                className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 text-sm md:text-base"
               >
                 Schedule a Demo
               </Link>
               <Link
                 to="/what-we-do"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-200"
+                className="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-200 text-sm md:text-base"
               >
                 Explore Features
               </Link>
               <Link
                 to="/pricing"
-                className="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-200"
+                className="px-6 py-3 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-blue-600 transition-all duration-200 text-sm md:text-base"
               >
                 View Pricing
               </Link>
@@ -665,9 +671,14 @@ const WhoWeServe = () => {
           </div>
         </section>
 
+        </main>
+
         {/* Footer */}
-      <Footer />
-    </div>
+        <Footer />
+
+        {/* Chatbot */}
+        <Chatbot />
+      </div>
     </PageTransition>
   );
 };

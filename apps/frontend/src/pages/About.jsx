@@ -1,5 +1,6 @@
 import React from 'react'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 
 const About = () => {
   const team = [
@@ -200,6 +201,9 @@ const About = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

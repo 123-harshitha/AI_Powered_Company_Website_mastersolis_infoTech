@@ -2,12 +2,13 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 import Card from '../components/UI/Card'
 import Icon from '../components/UI/Icon'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
 
 /**
- * Who We Are Page - FWC Design System
+ * Who We Are Page - Mastersolis Infotech Design System
  * Company information, team, mission, and values
  */
 const WhoWeAre = () => {
@@ -572,6 +573,9 @@ const WhoWeAre = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

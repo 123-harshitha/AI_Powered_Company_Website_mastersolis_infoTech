@@ -58,7 +58,7 @@ const emailTemplates = {
         <p style="color: #6b7280; font-size: 14px;">
           Best regards,<br>
           <strong>Mastersolis Infotech HR Team</strong><br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -171,7 +171,7 @@ const emailTemplates = {
           Best regards,<br>
           <strong>${data.scheduledByName}</strong><br>
           Mastersolis Infotech HR Team<br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -247,7 +247,7 @@ const emailTemplates = {
           Best regards,<br>
           <strong>${data.rescheduledByName}</strong><br>
           Mastersolis Infotech HR Team<br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -290,7 +290,7 @@ const emailTemplates = {
           Best regards,<br>
           <strong>${data.cancelledByName}</strong><br>
           Mastersolis Infotech HR Team<br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -351,7 +351,7 @@ const emailTemplates = {
         <p style="color: #6b7280; font-size: 14px;">
           Best regards,<br>
           <strong>Mastersolis Infotech HR Team</strong><br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -402,7 +402,7 @@ const emailTemplates = {
         <p style="color: #6b7280; font-size: 14px;">
           Best regards,<br>
           <strong>Mastersolis Infotech System</strong><br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `
@@ -489,7 +489,7 @@ const emailTemplates = {
         <p style="color: #6b7280; font-size: 14px;">
           Best regards,<br>
           <strong>Mastersolis Infotech HR Team</strong><br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a><br>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a><br>
           Phone: (555) 123-4567
         </p>
       </div>
@@ -564,7 +564,7 @@ const emailTemplates = {
         <p style="color: #6b7280; font-size: 14px;">
           Best regards,<br>
           <strong>Mastersolis Infotech System</strong><br>
-          <a href="mailto:hr@fwchrms.com" style="color: #2563eb;">hr@fwchrms.com</a>
+          <a href="mailto:hr@mastersolisinfotech.com" style="color: #2563eb;">hr@mastersolisinfotech.com</a>
         </p>
       </div>
     `

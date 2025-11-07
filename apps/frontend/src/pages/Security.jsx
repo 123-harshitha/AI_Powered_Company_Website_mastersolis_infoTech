@@ -1,5 +1,7 @@
 import React from 'react'
+import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 
 const Security = () => {
   const securityFeatures = [
@@ -70,29 +72,10 @@ const Security = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="h-10 w-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
-                <p className="text-sm text-gray-500">Human Resource Management System</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </header>
+      <NavBar />
 
       {/* Main Content */}
-      <main className="py-12">
+      <main className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -180,6 +163,9 @@ const Security = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

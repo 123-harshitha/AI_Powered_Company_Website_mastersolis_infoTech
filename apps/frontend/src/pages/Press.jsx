@@ -1,5 +1,6 @@
 import React from 'react'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 
 const Press = () => {
   const pressReleases = [
@@ -26,7 +27,7 @@ const Press = () => {
   const mediaKit = {
     logo: 'https://via.placeholder.com/200x100/3B82F6/FFFFFF?text=Mastersolis+Infotech',
     brandColors: ['#3B82F6', '#8B5CF6', '#10B981'],
-    pressContact: 'press@fwchrms.com'
+    pressContact: 'press@mastersolisinfotech.com'
   }
 
   return (
@@ -149,6 +150,9 @@ const Press = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

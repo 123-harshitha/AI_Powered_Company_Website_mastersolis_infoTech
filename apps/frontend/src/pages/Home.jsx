@@ -13,7 +13,7 @@ import PageTransition from '../components/PageTransition'
 import { pageVariants } from '../components/motionVariants'
 
 /**
- * Home Page Component - FWC Design System
+ * Home Page Component - Mastersolis Infotech Design System
  * Complete homepage implementation with all sections and animations
  */
 const Home = () => {

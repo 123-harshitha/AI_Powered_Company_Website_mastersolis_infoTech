@@ -1,5 +1,6 @@
 import React from 'react'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 
 const Privacy = () => {
   return (
@@ -115,7 +116,7 @@ const Privacy = () => {
                 </p>
                 <div className="bg-gray-50 rounded-lg p-4">
                   <p className="text-gray-700">
-                    <strong>Email:</strong> privacy@fwchrms.com<br />
+                    <strong>Email:</strong> privacy@mastersolisinfotech.com<br />
                     <strong>Phone:</strong> +1 (555) 123-4567<br />
                     <strong>Address:</strong> 123 Business Ave, Suite 100, New York, NY 10001
                   </p>
@@ -127,6 +128,9 @@ const Privacy = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

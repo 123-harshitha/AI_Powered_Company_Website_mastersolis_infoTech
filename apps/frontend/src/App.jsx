@@ -11,6 +11,7 @@ import Layout from './components/Layout'
 import CandidateLayout from './components/CandidateLayout'
 import LoadingSpinner from './components/LoadingSpinner'
 import ScrollToTop from './components/ScrollToTop'
+import Chatbot from './components/Chatbot'
 
 // Pages
 import Home from './pages/Home'
@@ -31,6 +32,7 @@ import Roadmap from './pages/Roadmap'
 import About from './pages/About'
 import Press from './pages/Press'
 import Blog from './pages/Blog'
+import BlogDetail from './pages/BlogDetail'
 import Partners from './pages/Partners'
 import HelpCenter from './pages/HelpCenter'
 import Documentation from './pages/Documentation'
@@ -118,6 +120,9 @@ function App() {
                   },
                 }}
               />
+              {/* Global Chatbot - appears on all pages */}
+              <Chatbot />
+              
               <Routes>
                 {/* Public routes */}
                 <Route path="/" element={<Home />} />
@@ -140,6 +145,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/press" element={<Press />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogDetail />} />
                 <Route path="/partners" element={<Partners />} />
                 
                 {/* Footer link routes - Resources */}

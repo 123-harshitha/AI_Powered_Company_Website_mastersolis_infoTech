@@ -121,6 +121,7 @@ app.use('/api/reports', require('./routes/reports'));
 app.use('/api/ai', require('./routes/ai'));
 app.use('/api/chatbot', require('./routes/chatbot'));
 app.use('/api/services', require('./routes/services'));
+app.use('/api/newsletter', require('./routes/newsletter'));
 app.use('/api/files/:folder/:filename', require('./middleware/fileUpload').serveFile);
 
 // Error handling middleware

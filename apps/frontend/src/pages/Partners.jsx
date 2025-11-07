@@ -1,5 +1,6 @@
 import React from 'react'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 
 const Partners = () => {
   const partners = [
@@ -145,6 +146,9 @@ const Partners = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

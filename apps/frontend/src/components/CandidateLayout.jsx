@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { useCandidateAuth } from '../contexts/CandidateAuthContext'
 import Button from '../components/UI/Button'
 import Icon from '../components/UI/Icon'
+import Logo from '../components/Logo'
 import PageTransition from '../components/PageTransition'
 
 const CandidateLayout = () => {
@@ -32,10 +33,13 @@ const CandidateLayout = () => {
           <div className="flex flex-col flex-grow pt-5 bg-white overflow-y-auto border-r border-gray-200">
             {/* Logo */}
             <div className="flex items-center flex-shrink-0 px-4">
-              <Link to="/candidate-portal/dashboard" className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">C</span>
-                </div>
+              <Logo 
+                size="sm" 
+                href="/candidate-portal/dashboard" 
+                showText={false}
+                className="cursor-pointer"
+              />
+              <Link to="/candidate-portal/dashboard" className="ml-2">
                 <span className="text-xl font-bold text-gray-900">Candidate Portal</span>
               </Link>
             </div>
@@ -149,10 +153,15 @@ const CandidateLayout = () => {
             </div>
             <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
               <div className="flex-shrink-0 flex items-center px-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">C</span>
-                </div>
-                <span className="ml-3 text-xl font-bold text-gray-900">Candidate Portal</span>
+                <Logo 
+                  size="sm" 
+                  href="/candidate-portal/dashboard" 
+                  showText={false}
+                  className="cursor-pointer"
+                />
+                <Link to="/candidate-portal/dashboard" className="ml-2">
+                  <span className="text-xl font-bold text-gray-900">Candidate Portal</span>
+                </Link>
               </div>
               <nav className="mt-5 px-2 space-y-1">
                 {navigation.map((item) => {

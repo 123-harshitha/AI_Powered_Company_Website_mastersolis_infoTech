@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
  */
 const Logo = ({ 
   size = 'md', 
-  showText = false, 
+  showText = true, 
   href = '/', 
   className = '',
   onClick,
@@ -82,15 +82,17 @@ const Logo = ({
       </motion.div>
       
       {showText && (
-        <span className={`${currentSize.spacing} ${currentSize.text} font-bold ${
-          variant === 'white' 
-            ? 'text-white group-hover:text-blue-300' 
-            : variant === 'dark'
-            ? 'text-gray-900 group-hover:text-blue-600'
-            : 'text-gray-900 group-hover:text-blue-600'
-        } transition-all duration-300`}>
-          Mastersolis Infotech
-        </span>
+        <div className={`${currentSize.spacing} flex flex-col`}>
+          <span className={`${currentSize.text} font-bold ${
+            variant === 'white' 
+              ? 'text-white group-hover:text-blue-300' 
+              : variant === 'dark'
+              ? 'text-gray-900 group-hover:text-blue-600'
+              : 'text-gray-900 group-hover:text-blue-600'
+          } transition-all duration-300`}>
+            Mastersolis Infotech
+          </span>
+        </div>
       )}
     </div>
   )

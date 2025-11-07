@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 /**
- * Reusable Button Component - FWC Design System
+ * Reusable Button Component - Mastersolis Infotech Design System
  * Supports primary (gradient), secondary (outline), and ghost styles with micro-interactions.
  */
 const Button = ({ 

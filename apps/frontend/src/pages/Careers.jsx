@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { careerAPI } from '../services/api'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 import toast from 'react-hot-toast'
 
 const Careers = () => {
@@ -512,6 +513,9 @@ const Careers = () => {
       )}
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

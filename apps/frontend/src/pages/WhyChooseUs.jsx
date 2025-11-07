@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import NavBar from '../components/NavBar'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 import Card from '../components/UI/Card'
 import Icon from '../components/UI/Icon'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
@@ -59,7 +60,7 @@ const WhyChooseUs = () => {
   const comparisons = [
     {
       feature: 'Setup Time',
-      fwc: '7 days',
+      mastersolis: '7 days',
       competitor: '30-90 days',
       advantage: '4x faster'
     },
@@ -243,7 +244,7 @@ const WhyChooseUs = () => {
                     {comparisons.map((comparison, index) => (
                       <motion.tr key={index} variants={itemFadeIn} className="hover:bg-white/5 transition-colors duration-300">
                         <td className="px-6 py-4 text-sm font-medium text-white">{comparison.feature}</td>
-                        <td className="px-6 py-4 text-sm text-center text-blue-400 font-semibold">{comparison.fwc}</td>
+                        <td className="px-6 py-4 text-sm text-center text-blue-400 font-semibold">{comparison.mastersolis}</td>
                         <td className="px-6 py-4 text-sm text-center text-gray-300">{comparison.competitor}</td>
                         <td className="px-6 py-4 text-sm text-center text-green-400 font-semibold">{comparison.advantage}</td>
                       </motion.tr>
@@ -349,6 +350,9 @@ const WhyChooseUs = () => {
       </main>
 
       <Footer />
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

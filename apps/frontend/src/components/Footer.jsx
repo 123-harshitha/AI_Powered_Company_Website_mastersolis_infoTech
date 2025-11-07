@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Icon from './UI/Icon'
+import Logo from './Logo'
 import { staggerContainer, itemFadeIn } from './motionVariants'
 
 /**
@@ -159,17 +160,13 @@ const Footer = () => {
               className="lg:col-span-4 space-y-6"
             >
               {/* Logo - Clickable link to home */}
-              <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-                <img 
-                  src="/logo.jpg" 
-                  alt="Mastersolis Infotech Logo" 
-                  className="w-10 h-10 rounded-xl object-contain shadow-md"
-                  onError={(e) => {
-                    console.warn('Logo image failed to load:', e.target.src)
-                  }}
-                />
-                <span className="text-2xl font-bold font-heading">Mastersolis Infotech</span>
-              </Link>
+              <Logo 
+                size="md" 
+                href="/" 
+                showText={true} 
+                variant="white"
+                className="cursor-pointer"
+              />
 
               {/* Description */}
               <p className="text-gray-300 leading-relaxed max-w-md">

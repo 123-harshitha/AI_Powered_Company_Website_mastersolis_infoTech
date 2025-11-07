@@ -10,6 +10,8 @@
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
     "dev:backend": "cd apps/backend && npm run dev",
     "dev:frontend": "cd apps/frontend && npm run dev",
+    "dev:ai": "cd services/ml && python main.py",
+    "dev:ml": "cd services/ml && python main.py",
     "test": "npm run test:backend",
     "test:backend": "cd apps/backend && npm test",
     "build": "npm run build:frontend",

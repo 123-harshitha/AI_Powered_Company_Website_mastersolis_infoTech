@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 /**
- * Reusable Card Component - FWC Design System
+ * Reusable Card Component - Mastersolis Infotech Design System
  * Provides consistent card layout with hover effects, elevation, and accent borders.
  */
 const Card = ({ 
