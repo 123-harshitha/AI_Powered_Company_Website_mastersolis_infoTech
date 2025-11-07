@@ -194,7 +194,7 @@ const MobileSidebar = ({ isOpen, onClose }) => {
                 </svg>
               </div>
               <div className="ml-3">
-                <h1 className="text-white text-lg font-semibold">FWC HRMS</h1>
+                <h1 className="text-white text-lg font-semibold">Mastersolis Infotech</h1>
               </div>
             </div>
             <button
@@ -253,7 +253,7 @@ const MobileSidebar = ({ isOpen, onClose }) => {
           {/* Footer */}
           <div className="px-4 py-4 bg-gray-700 border-t border-gray-600">
             <div className="text-xs text-gray-400 text-center">
-              FWC HRMS v1.0.0
+              Mastersolis Infotech v1.0.0
             </div>
           </div>
         </div>

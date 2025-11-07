@@ -1,6 +1,6 @@
-/* FWC Design Tokens - Professional Design System */
+/* Mastersolis Infotech Design Tokens - Professional Design System */
 :root {
-  /* Primary Colors - FWC Brand */
+  /* Primary Colors - Mastersolis Infotech Brand */
   --primary-900: #003366;
   --primary-800: #004080;
   --primary-700: #005299;
@@ -60,7 +60,7 @@
   --shadow-medium: rgba(3, 12, 30, 0.12);
   --shadow-heavy: rgba(3, 12, 30, 0.16);
   
-  /* Gradients - FWC Brand */
+  /* Gradients - Mastersolis Infotech Brand */
   --gradient-primary: linear-gradient(90deg, var(--primary-900) 0%, var(--accent) 100%);
   --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--primary-500) 100%);
   --gradient-hero: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-600) 50%, var(--accent) 100%);

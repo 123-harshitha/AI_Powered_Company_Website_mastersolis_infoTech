@@ -7,6 +7,102 @@ const { asyncHandler } = require('../middleware/errorHandler');
 
 const router = express.Router();
 
+// Public endpoint for career page (no auth required)
+router.get('/career-page', asyncHandler(async (req, res) => {
+  const { department, location, type, page = 1, limit = 20 } = req.query;
+  const skip = (page - 1) * limit;
+
+  let query = { status: 'PUBLISHED' };
+  if (department) query.department = { $regex: department, $options: 'i' };
+  if (location) query.location = { $regex: location, $options: 'i' };
+  if (type) query.employmentType = type;
+
+  const jobPostings = await database.find('job_postings', query, {
+    skip: parseInt(skip),
+    limit: parseInt(limit),
+    sort: { publishedAt: -1, createdAt: -1 }
+  });
+
+  const total = await database.count('job_postings', query);
+
+  // Format jobs for career page (remove sensitive info)
+  const formattedJobs = jobPostings.map(job => ({
+    id: job._id,
+    title: job.title,
+    department: job.department,
+    location: job.location,
+    type: job.employmentType,
+    level: job.experienceLevel,
+    summary: job.summary || job.description?.substring(0, 200) + '...',
+    description: job.description,
+    requirements: job.requirements || [],
+    responsibilities: job.responsibilities || [],
+    salaryRange: job.salaryRange,
+    applicationDeadline: job.applicationDeadline,
+    publishedAt: job.publishedAt
+  }));
+
+  res.json({
+    success: true,
+    data: {
+      jobs: formattedJobs,
+      pagination: {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        total,
+        pages: Math.ceil(total / limit)
+      }
+    }
+  });
+}));
+
+// Get single job for career page (no auth required)
+router.get('/career-page/:id', asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ 
+      success: false,
+      message: 'Invalid job posting ID' 
+    });
+  }
+
+  const jobPosting = await database.findOne('job_postings', { 
+    _id: new ObjectId(id),
+    status: 'PUBLISHED'
+  });
+
+  if (!jobPosting) {
+    return res.status(404).json({ 
+      success: false,
+      message: 'Job posting not found' 
+    });
+  }
+
+  // Format job for career page
+  const formattedJob = {
+    id: jobPosting._id,
+    title: jobPosting.title,
+    department: jobPosting.department,
+    location: jobPosting.location,
+    type: jobPosting.employmentType,
+    level: jobPosting.experienceLevel,
+    summary: jobPosting.summary || jobPosting.description?.substring(0, 200) + '...',
+    description: jobPosting.description,
+    requirements: jobPosting.requirements || [],
+    responsibilities: jobPosting.responsibilities || [],
+    benefits: jobPosting.benefits || [],
+    salaryRange: jobPosting.salaryRange,
+    applicationDeadline: jobPosting.applicationDeadline,
+    publishedAt: jobPosting.publishedAt
+  };
+
+  res.json({
+    success: true,
+    data: formattedJob
+  });
+}));
+
 // Public endpoint for job postings (for HR screening)
 router.get('/public', verifyToken, checkRole('ADMIN', 'HR', 'MANAGER'), asyncHandler(async (req, res) => {
   const { status, department, page = 1, limit = 50 } = req.query;
@@ -129,6 +225,7 @@ router.post('/', checkRole('ADMIN', 'HR'), [
     experienceLevel,
     salaryRange,
     description,
+    summary,
     requirements,
     responsibilities,
     benefits,
@@ -143,6 +240,7 @@ router.post('/', checkRole('ADMIN', 'HR'), [
     experienceLevel: experienceLevel || 'MID_LEVEL',
     salaryRange,
     description,
+    summary: summary || description?.substring(0, 200) + '...',
     requirements: requirements || [],
     responsibilities: responsibilities || [],
     benefits: benefits || [],

@@ -37,6 +37,7 @@ import Documentation from './pages/Documentation'
 import Support from './pages/Support'
 import StyleGuide from './pages/StyleGuide'
 import Privacy from './pages/Privacy'
+import TermsOfService from './pages/TermsOfService'
 import NavigationTest from './pages/NavigationTest'
 import DebugPage from './pages/DebugPage'
 import CandidateRegister from './pages/CandidateRegister'
@@ -63,6 +64,7 @@ import DepartmentManagement from './pages/DepartmentManagement'
 import ReportsAnalytics from './pages/ReportsAnalytics'
 import Settings from './pages/Settings'
 import TeamManagement from './pages/TeamManagement'
+import ServiceManagement from './pages/ServiceManagement'
 
 // Create a client
 const queryClient = new QueryClient({
@@ -119,7 +121,7 @@ function App() {
               <Routes>
                 {/* Public routes */}
                 <Route path="/" element={<Home />} />
-                <Route path="/who-we-serve" element={<WhoWeServeSimple />} />
+                <Route path="/who-we-serve" element={<WhoWeServe />} />
                 <Route path="/what-we-do" element={<WhatWeDo />} />
                 <Route path="/who-we-are" element={<WhoWeAre />} />
                 <Route path="/why-choose-us" element={<WhyChooseUs />} />
@@ -148,6 +150,7 @@ function App() {
                 
                 {/* Footer link routes - Legal */}
                 <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<TermsOfService />} />
                 <Route path="/navigation-test" element={<NavigationTest />} />
                 <Route path="/debug" element={<DebugPage />} />
                 
@@ -296,6 +299,14 @@ function App() {
                   </ProtectedRoute>
                 }>
                   <Route index element={<Settings />} />
+                </Route>
+
+                <Route path="/services" element={
+                  <ProtectedRoute requiredRoles={['ADMIN']}>
+                    <Layout />
+                  </ProtectedRoute>
+                }>
+                  <Route index element={<ServiceManagement />} />
                 </Route>
 
                 {/* Catch-all route - redirect to appropriate dashboard */}

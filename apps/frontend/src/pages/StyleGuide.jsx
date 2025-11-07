@@ -7,7 +7,7 @@ import Modal from '../components/UI/Modal'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
 
 /**
- * Style Guide Page - FWC Design System
+ * Style Guide Page - Mastersolis Infotech Design System
  * Comprehensive showcase of all components, tokens, and patterns
  */
 const StyleGuide = () => {
@@ -57,7 +57,7 @@ const StyleGuide = () => {
                 <span className="text-white font-bold text-xl">F</span>
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900 font-heading">FWC Design System</h1>
+                <h1 className="text-2xl font-bold text-gray-900 font-heading">Mastersolis Infotech Design System</h1>
                 <p className="text-gray-600">Style Guide & Component Library</p>
               </div>
             </div>

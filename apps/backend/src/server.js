@@ -71,6 +71,10 @@ app.get('/health', (req, res) => {
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || 'development',
     port: PORT,
+    database: {
+      connected: database.isConnected,
+      status: database.isConnected ? 'connected' : 'disconnected'
+    },
     cors: {
       origin: [
         process.env.FRONTEND_URL || 'http://localhost:5173',
@@ -88,7 +92,11 @@ app.get('/api/health', (req, res) => {
     status: 'OK', 
     message: 'API is running',
     timestamp: new Date().toISOString(),
-    port: PORT
+    port: PORT,
+    database: {
+      connected: database.isConnected,
+      status: database.isConnected ? 'connected' : 'disconnected'
+    }
   });
 });
 
@@ -100,6 +108,7 @@ app.use('/api/attendance', require('./routes/attendance'));
 app.use('/api/leave-requests', require('./routes/leaveRequests'));
 app.use('/api/payroll', require('./routes/payroll'));
 app.use('/api/job-postings', require('./routes/jobPostings'));
+app.use('/api/career', require('./routes/careerApplications'));
 app.use('/api/candidates', require('./routes/candidates'));
 app.use('/api/candidate-interviews', require('./routes/candidateInterviews'));
 app.use('/api/resume-screening', require('./routes/resumeScreening'));
@@ -110,6 +119,8 @@ app.use('/api/candidate-conversion', require('./routes/candidateConversion'));
 app.use('/api/performance-reviews', require('./routes/performanceReviews'));
 app.use('/api/reports', require('./routes/reports'));
 app.use('/api/ai', require('./routes/ai'));
+app.use('/api/chatbot', require('./routes/chatbot'));
+app.use('/api/services', require('./routes/services'));
 app.use('/api/files/:folder/:filename', require('./middleware/fileUpload').serveFile);
 
 // Error handling middleware
@@ -123,18 +134,29 @@ app.use('*', (req, res) => {
 // Start server
 const startServer = async () => {
   try {
-    // Connect to MongoDB
-    await database.connect();
+    // Connect to MongoDB (with retry logic)
+    const db = await database.connect();
     
-    // Create database indexes
-    await database.createIndexes();
+    // Create database indexes (only if connected)
+    if (db) {
+      await database.createIndexes();
+    }
     
-    // Start the server
+    // Start the server even if MongoDB is not connected
     const server = app.listen(PORT, () => {
       console.log(`🚀 Backend server running on port ${PORT}`);
       console.log(`📋 Health check: http://localhost:${PORT}/health`);
       console.log(`🔐 Auth endpoints: http://localhost:${PORT}/api/auth`);
-      console.log(`📊 Database: Connected to MongoDB Atlas`);
+      
+      if (database.isConnected) {
+        console.log(`📊 Database: Connected to MongoDB`);
+      } else {
+        console.log(`⚠️  Database: MongoDB not connected - some features may not work`);
+        console.log(`💡 To enable database features:`);
+        console.log(`   1. Install MongoDB: https://www.mongodb.com/try/download/community`);
+        console.log(`   2. Start MongoDB service: net start MongoDB`);
+        console.log(`   3. Or set DATABASE_URL environment variable for remote MongoDB`);
+      }
     });
 
     // Handle server errors
@@ -151,7 +173,13 @@ const startServer = async () => {
 
   } catch (error) {
     console.error('❌ Failed to start server:', error);
-    process.exit(1);
+    // Don't exit - try to start server anyway
+    console.log('⚠️  Attempting to start server without database connection...');
+    
+    const server = app.listen(PORT, () => {
+      console.log(`🚀 Backend server running on port ${PORT} (limited functionality)`);
+      console.log(`⚠️  Database connection failed - some features may not work`);
+    });
   }
 };
 

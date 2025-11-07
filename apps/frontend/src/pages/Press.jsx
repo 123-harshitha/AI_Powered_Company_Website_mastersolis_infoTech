@@ -5,26 +5,26 @@ const Press = () => {
   const pressReleases = [
     {
       date: '2024-01-15',
-      title: 'FWC HRMS Launches AI-Powered Recruitment Features',
+      title: 'Mastersolis Infotech Launches AI-Powered Recruitment Features',
       summary: 'New AI capabilities streamline candidate screening and interview processes.',
       category: 'Product Update'
     },
     {
       date: '2023-12-10',
-      title: 'FWC HRMS Reaches 5,000 Active Users Milestone',
+      title: 'Mastersolis Infotech Reaches 5,000 Active Users Milestone',
       summary: 'Company celebrates rapid growth and expanding customer base.',
       category: 'Company News'
     },
     {
       date: '2023-11-20',
-      title: 'FWC HRMS Partners with Leading Payroll Providers',
+      title: 'Mastersolis Infotech Partners with Leading Payroll Providers',
       summary: 'New integrations simplify payroll processing for customers.',
       category: 'Partnership'
     }
   ]
 
   const mediaKit = {
-    logo: 'https://via.placeholder.com/200x100/3B82F6/FFFFFF?text=FWC+HRMS',
+    logo: 'https://via.placeholder.com/200x100/3B82F6/FFFFFF?text=Mastersolis+Infotech',
     brandColors: ['#3B82F6', '#8B5CF6', '#10B981'],
     pressContact: 'press@fwchrms.com'
   }
@@ -44,7 +44,7 @@ const Press = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Press & Media</p>
               </div>
             </div>
@@ -61,7 +61,7 @@ const Press = () => {
               Press & Media
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Stay updated with the latest news, press releases, and media resources from FWC HRMS.
+              Stay updated with the latest news, press releases, and media resources from Mastersolis Infotech.
             </p>
           </div>
 
@@ -101,7 +101,7 @@ const Press = () => {
                 <div className="space-y-4">
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Logo</h4>
-                    <img src={mediaKit.logo} alt="FWC HRMS Logo" className="h-16 bg-gray-100 rounded" />
+                    <img src={mediaKit.logo} alt="Mastersolis Infotech Logo" className="h-16 bg-gray-100 rounded" />
                   </div>
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Brand Colors</h4>

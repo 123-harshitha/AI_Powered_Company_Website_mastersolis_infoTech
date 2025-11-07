@@ -1,89 +1,138 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { careerAPI } from '../services/api'
 import Footer from '../components/Footer'
+import toast from 'react-hot-toast'
 
 const Careers = () => {
-  const openPositions = [
-    {
-      title: 'Senior Frontend Developer',
-      department: 'Engineering',
-      location: 'Remote',
-      type: 'Full-time',
-      description: 'Join our frontend team to build intuitive and responsive user interfaces for our HRMS platform.',
-      requirements: [
-        '5+ years of React.js experience',
-        'Strong TypeScript skills',
-        'Experience with modern CSS frameworks',
-        'Knowledge of testing frameworks'
-      ]
-    },
-    {
-      title: 'Backend Engineer',
-      department: 'Engineering',
-      location: 'San Francisco, CA',
-      type: 'Full-time',
-      description: 'Help us scale our backend infrastructure and build robust APIs for our growing user base.',
-      requirements: [
-        '4+ years of Node.js/Python experience',
-        'Database design and optimization',
-        'Microservices architecture',
-        'Cloud platform experience (AWS/GCP)'
-      ]
-    },
-    {
-      title: 'Product Manager',
-      department: 'Product',
-      location: 'New York, NY',
-      type: 'Full-time',
-      description: 'Drive product strategy and work with cross-functional teams to deliver exceptional user experiences.',
-      requirements: [
-        '3+ years of product management experience',
-        'B2B SaaS experience preferred',
-        'Strong analytical skills',
-        'Excellent communication skills'
-      ]
-    },
-    {
-      title: 'UX Designer',
-      department: 'Design',
-      location: 'Remote',
-      type: 'Full-time',
-      description: 'Create beautiful and functional designs that make HR management simple and enjoyable.',
-      requirements: [
-        'Portfolio demonstrating UX/UI skills',
-        'Experience with design systems',
-        'Prototyping and user research',
-        'Figma/Sketch proficiency'
-      ]
-    },
-    {
-      title: 'Customer Success Manager',
-      department: 'Customer Success',
-      location: 'Austin, TX',
-      type: 'Full-time',
-      description: 'Help our customers achieve success with FWC HRMS and drive adoption and retention.',
-      requirements: [
-        '2+ years of customer success experience',
-        'HR domain knowledge preferred',
-        'Strong problem-solving skills',
-        'Experience with CRM tools'
-      ]
-    },
-    {
-      title: 'DevOps Engineer',
-      department: 'Engineering',
-      location: 'Remote',
-      type: 'Full-time',
-      description: 'Build and maintain our cloud infrastructure to ensure high availability and performance.',
-      requirements: [
-        '3+ years of DevOps experience',
-        'Kubernetes and Docker expertise',
-        'CI/CD pipeline experience',
-        'Monitoring and logging tools'
-      ]
-    }
-  ]
+  const [jobs, setJobs] = useState([])
+  const [cultureBenefits, setCultureBenefits] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [selectedJob, setSelectedJob] = useState(null)
+  const [showApplicationModal, setShowApplicationModal] = useState(false)
+  const [applicationForm, setApplicationForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    coverLetter: '',
+    resume: null
+  })
+  const [submitting, setSubmitting] = useState(false)
+  const [filters, setFilters] = useState({
+    department: '',
+    location: '',
+    type: ''
+  })
 
-  const benefits = [
+  useEffect(() => {
+    fetchJobs()
+    fetchCultureBenefits()
+  }, [filters])
+
+  const fetchJobs = async () => {
+    try {
+      setLoading(true)
+      const params = {}
+      if (filters.department) params.department = filters.department
+      if (filters.location) params.location = filters.location
+      if (filters.type) params.type = filters.type
+
+      const response = await careerAPI.getJobs(params)
+      if (response.success) {
+        setJobs(response.data.jobs)
+      }
+    } catch (error) {
+      console.error('Error fetching jobs:', error)
+      toast.error('Failed to load job listings')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchCultureBenefits = async () => {
+    try {
+      const response = await careerAPI.getCultureBenefits()
+      if (response.success) {
+        setCultureBenefits(response.data)
+      }
+    } catch (error) {
+      console.error('Error fetching culture benefits:', error)
+    }
+  }
+
+  const handleApplyClick = (job) => {
+    setSelectedJob(job)
+    setShowApplicationModal(true)
+  }
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setApplicationForm(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleFileChange = (e) => {
+    setApplicationForm(prev => ({
+      ...prev,
+      resume: e.target.files[0]
+    }))
+  }
+
+  const handleSubmitApplication = async (e) => {
+    e.preventDefault()
+    
+    if (!applicationForm.name || !applicationForm.email || !applicationForm.resume) {
+      toast.error('Please fill in all required fields')
+      return
+    }
+
+    setSubmitting(true)
+    try {
+      const formData = new FormData()
+      formData.append('name', applicationForm.name)
+      formData.append('email', applicationForm.email)
+      formData.append('phone', applicationForm.phone)
+      formData.append('coverLetter', applicationForm.coverLetter)
+      formData.append('jobId', selectedJob.id)
+      formData.append('resume', applicationForm.resume)
+
+      const response = await careerAPI.apply(formData)
+      
+      if (response.success) {
+        toast.success('Application submitted successfully! Check your email for confirmation.')
+        setShowApplicationModal(false)
+        setApplicationForm({
+          name: '',
+          email: '',
+          phone: '',
+          coverLetter: '',
+          resume: null
+        })
+        setSelectedJob(null)
+      } else {
+        toast.error(response.message || 'Failed to submit application')
+      }
+    } catch (error) {
+      console.error('Error submitting application:', error)
+      toast.error('Failed to submit application. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const getTypeLabel = (type) => {
+    const types = {
+      'FULL_TIME': 'Full-time',
+      'PART_TIME': 'Part-time',
+      'CONTRACT': 'Contract',
+      'INTERN': 'Intern',
+      'FREELANCE': 'Freelance'
+    }
+    return types[type] || type
+  }
+
+  const benefits = cultureBenefits ? [
     {
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,7 +140,7 @@ const Careers = () => {
         </svg>
       ),
       title: 'Competitive Salary',
-      description: 'Market-leading compensation packages with equity options'
+      description: cultureBenefits.benefits?.salary || 'Market-leading compensation packages with equity options'
     },
     {
       icon: (
@@ -100,7 +149,7 @@ const Careers = () => {
         </svg>
       ),
       title: 'Health & Wellness',
-      description: 'Comprehensive health, dental, and vision insurance'
+      description: cultureBenefits.benefits?.health || 'Comprehensive health, dental, and vision insurance'
     },
     {
       icon: (
@@ -109,7 +158,7 @@ const Careers = () => {
         </svg>
       ),
       title: 'Flexible Schedule',
-      description: 'Work-life balance with flexible hours and remote options'
+      description: cultureBenefits.benefits?.flexibility || 'Work-life balance with flexible hours and remote options'
     },
     {
       icon: (
@@ -118,7 +167,7 @@ const Careers = () => {
         </svg>
       ),
       title: 'Learning & Development',
-      description: 'Annual learning budget and conference attendance'
+      description: cultureBenefits.benefits?.learning || 'Annual learning budget and conference attendance'
     },
     {
       icon: (
@@ -128,18 +177,9 @@ const Careers = () => {
         </svg>
       ),
       title: 'Team Events',
-      description: 'Regular team building activities and company retreats'
-    },
-    {
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      title: 'Equipment & Tools',
-      description: 'Latest hardware and software tools to do your best work'
+      description: cultureBenefits.benefits?.teamEvents || 'Regular team building activities and company retreats'
     }
-  ]
+  ] : []
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -156,8 +196,8 @@ const Careers = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
-                <p className="text-sm text-gray-500">Human Resource Management System</p>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
+                <p className="text-sm text-gray-500">AI-Driven Digital Solutions</p>
               </div>
             </div>
           </div>
@@ -170,33 +210,92 @@ const Careers = () => {
           {/* Hero Section */}
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Join Our Team
+              Join the AI Revolution in Web Innovation
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Help us build the future of HR management. We're looking for passionate individuals 
-              who want to make a difference in how businesses manage their most important asset - their people.
+              We're hiring talented individuals passionate about AI, automation, and building the future of technology.
             </p>
           </div>
 
+          {/* Company Culture Section */}
+          {cultureBenefits && (
+            <div className="mb-16 bg-white rounded-lg p-8 shadow-lg">
+              <h2 className="text-3xl font-bold text-gray-900 text-center mb-6">
+                Our Culture
+              </h2>
+              <p className="text-lg text-gray-700 text-center max-w-4xl mx-auto leading-relaxed">
+                {cultureBenefits.culture}
+              </p>
+            </div>
+          )}
+
           {/* Benefits Section */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-              Why Work With Us
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-lg">
-                  <div className="text-blue-600 mb-4">
-                    {benefit.icon}
+          {benefits.length > 0 && (
+            <div className="mb-16">
+              <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
+                Why Work With Us
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="text-blue-600 mb-4">
+                      {benefit.icon}
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed">
+                      {benefit.description}
+                    </p>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600">
-                    {benefit.description}
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Filters */}
+          <div className="mb-8 bg-white rounded-lg p-6 shadow-lg">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Filter Jobs</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                <select
+                  value={filters.department}
+                  onChange={(e) => setFilters({...filters, department: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">All Departments</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Design">Design</option>
+                  <option value="Product">Product</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Sales">Sales</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                <input
+                  type="text"
+                  value={filters.location}
+                  onChange={(e) => setFilters({...filters, location: e.target.value})}
+                  placeholder="Search location..."
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Job Type</label>
+                <select
+                  value={filters.type}
+                  onChange={(e) => setFilters({...filters, type: e.target.value})}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">All Types</option>
+                  <option value="FULL_TIME">Full-time</option>
+                  <option value="PART_TIME">Part-time</option>
+                  <option value="CONTRACT">Contract</option>
+                  <option value="INTERN">Intern</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -205,121 +304,78 @@ const Careers = () => {
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
               Open Positions
             </h2>
-            <div className="space-y-6">
-              {openPositions.map((position, index) => (
-                <div key={index} className="bg-white rounded-lg p-6 shadow-lg">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        {position.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600">
-                        <span className="flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                          </svg>
-                          {position.department}
-                        </span>
-                        <span className="flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                          </svg>
-                          {position.location}
-                        </span>
-                        <span className="flex items-center">
-                          <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                          </svg>
-                          {position.type}
-                        </span>
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+                <p className="mt-4 text-gray-600">Loading job listings...</p>
+              </div>
+            ) : jobs.length === 0 ? (
+              <div className="text-center py-12 bg-white rounded-lg shadow-lg">
+                <p className="text-gray-600 text-lg">No job openings at the moment. Check back soon!</p>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {jobs.map((job) => (
+                  <div key={job.id} className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                          {job.title}
+                        </h3>
+                        <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                          <span className="flex items-center">
+                            <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            {job.department}
+                          </span>
+                          <span className="flex items-center">
+                            <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            {job.location || 'Remote'}
+                          </span>
+                          <span className="flex items-center">
+                            <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            {getTypeLabel(job.type)}
+                          </span>
+                          {job.salaryRange && (
+                            <span className="flex items-center">
+                              <svg className="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
+                              </svg>
+                              {job.salaryRange}
+                            </span>
+                          )}
+                        </div>
                       </div>
+                      <button
+                        onClick={() => handleApplyClick(job)}
+                        className="mt-4 md:mt-0 bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200"
+                      >
+                        Apply Now
+                      </button>
                     </div>
-                    <button className="mt-4 md:mt-0 bg-blue-600 text-white hover:bg-blue-700 px-6 py-2 rounded-lg font-medium transition-colors duration-200">
-                      Apply Now
-                    </button>
+                    <p className="text-gray-600 mb-4">
+                      {job.summary || job.description?.substring(0, 200) + '...'}
+                    </p>
+                    {job.requirements && job.requirements.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-2">Key Requirements:</h4>
+                        <ul className="list-disc list-inside text-gray-600 space-y-1">
+                          {job.requirements.slice(0, 3).map((req, reqIndex) => (
+                            <li key={reqIndex}>{req}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
-                  <p className="text-gray-600 mb-4">
-                    {position.description}
-                  </p>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-2">Requirements:</h4>
-                    <ul className="list-disc list-inside text-gray-600 space-y-1">
-                      {position.requirements.map((req, reqIndex) => (
-                        <li key={reqIndex}>{req}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Culture Section */}
-          <div className="bg-white rounded-lg p-8 shadow-lg mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-8">
-              Our Culture
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">What We Value</h3>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Innovation and continuous learning
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Collaboration and open communication
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Work-life balance and flexibility
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Diversity and inclusion
-                  </li>
-                </ul>
+                ))}
               </div>
-              <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">How We Work</h3>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                    Agile development methodology
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    Cross-functional team collaboration
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                    Innovation-focused mindset
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="h-5 w-5 text-blue-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                    Customer-centric approach
-                  </li>
-                </ul>
-              </div>
-            </div>
+            )}
           </div>
 
           {/* CTA Section */}
@@ -331,13 +387,129 @@ const Careers = () => {
               <p className="text-blue-100 mb-6">
                 We're always looking for talented individuals. Send us your resume and let us know how you can contribute to our mission.
               </p>
-              <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
-                Send Resume
-              </button>
+              <a href="mailto:careers@mastersolis.com" className="inline-block bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
+                Email: careers@mastersolis.com
+              </a>
             </div>
           </div>
         </div>
       </main>
+
+      {/* Application Modal */}
+      {showApplicationModal && selectedJob && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Apply for {selectedJob.title}
+                </h2>
+                <button
+                  onClick={() => {
+                    setShowApplicationModal(false)
+                    setSelectedJob(null)
+                  }}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <form onSubmit={handleSubmitApplication} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={applicationForm.name}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Email <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={applicationForm.email}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Phone
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={applicationForm.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Resume <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <p className="mt-1 text-sm text-gray-500">PDF, DOC, or DOCX (max 5MB)</p>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Cover Letter (Optional)
+                  </label>
+                  <textarea
+                    name="coverLetter"
+                    value={applicationForm.coverLetter}
+                    onChange={handleInputChange}
+                    rows={4}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-4 pt-4">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowApplicationModal(false)
+                      setSelectedJob(null)
+                    }}
+                    className="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={submitting}
+                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {submitting ? 'Submitting...' : 'Submit Application'}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </div>

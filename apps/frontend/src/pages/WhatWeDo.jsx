@@ -7,8 +7,8 @@ import Icon from '../components/UI/Icon'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
 
 /**
- * What We Do Page - FWC Design System
- * Showcases our comprehensive HRMS platform features and capabilities
+ * What We Do Page - Mastersolis Infotech Design System
+ * Showcases our comprehensive AI-driven digital solutions and capabilities
  */
 const WhatWeDo = () => {
   const coreFeatures = [
@@ -52,28 +52,28 @@ const WhatWeDo = () => {
 
   const solutions = [
     {
-      title: 'Recruitment & Onboarding',
-      description: 'Streamline your hiring process with AI-powered candidate screening and automated onboarding workflows.',
+      title: 'AI Website Builder',
+      description: 'Build complete websites using natural-language inputs. Create entire business websites in minutes with AI-powered automation.',
       icon: 'users',
-      benefits: ['Faster Hiring', 'Better Candidate Matching', 'Reduced Time-to-Hire', 'Improved Onboarding Experience']
+      benefits: ['Natural Language Input', '10× Faster Creation', 'AI-Powered Automation', 'Complete Websites']
     },
     {
-      title: 'Payroll Management',
-      description: 'Automated payroll processing with tax calculations, benefits management, and compliance reporting.',
+      title: 'Custom Web Development',
+      description: 'Scalable React + Django-based platforms. Enterprise-grade web solutions built with modern frameworks and best practices.',
       icon: 'chart',
-      benefits: ['Automated Processing', 'Tax Compliance', 'Benefits Management', 'Error Reduction']
+      benefits: ['React + Django', 'Scalable Platforms', 'Enterprise-Grade', 'Modern Frameworks']
     },
     {
-      title: 'Leave Management',
-      description: 'Comprehensive leave tracking with approval workflows, policy management, and calendar integration.',
+      title: 'AI Resume Parsing',
+      description: 'Upload, parse, and score resumes automatically. Intelligent recruitment tools that streamline hiring with AI-powered analysis.',
       icon: 'clock',
-      benefits: ['Automated Approvals', 'Policy Compliance', 'Calendar Integration', 'Leave Analytics']
+      benefits: ['Automatic Parsing', 'AI Scoring', 'Resume Analysis', 'Streamlined Hiring']
     },
     {
-      title: 'Performance Reviews',
-      description: '360-degree performance reviews with goal tracking, feedback collection, and development planning.',
+      title: 'Analytics Dashboard',
+      description: 'Real-time business insights with AI summaries. Comprehensive dashboards with intelligent analytics and automated reporting.',
       icon: 'star',
-      benefits: ['360 Reviews', 'Goal Tracking', 'Development Planning', 'Performance Analytics']
+      benefits: ['Real-time Insights', 'AI Summaries', 'Business Analytics', 'Automated Reporting']
     }
   ]
 
@@ -114,8 +114,8 @@ const WhatWeDo = () => {
                 What We <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Do</span>
               </h1>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
-                We provide comprehensive Human Resource Management solutions that streamline operations, 
-                boost productivity, and create exceptional employee experiences through cutting-edge technology.
+                We provide comprehensive AI-driven digital solutions that automate digital presence, 
+                from smart websites to AI-based recruitment and analytics, powered by cutting-edge technology.
               </p>
             </motion.div>
           </div>

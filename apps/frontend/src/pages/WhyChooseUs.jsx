@@ -7,7 +7,7 @@ import Icon from '../components/UI/Icon'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
 
 /**
- * Why Choose Us Page - FWC Design System
+ * Why Choose Us Page - Mastersolis Infotech Design System
  * Competitive advantages, benefits, and differentiators
  */
 const WhyChooseUs = () => {
@@ -97,7 +97,7 @@ const WhyChooseUs = () => {
 
   const testimonials = [
     {
-      quote: "FWC HRMS transformed our HR operations completely. The AI insights helped us reduce hiring time by 50% and improve employee satisfaction significantly.",
+      quote: "Mastersolis Infotech transformed our HR operations completely. The AI insights helped us reduce hiring time by 50% and improve employee satisfaction significantly.",
       author: "Sarah Johnson",
       role: "CHRO, TechCorp Solutions",
       company: "TechCorp Solutions"
@@ -141,7 +141,7 @@ const WhyChooseUs = () => {
                 Why Choose Us
               </div>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-8 font-heading leading-tight">
-                Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">FWC HRMS</span>
+                Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">Mastersolis Infotech</span>
               </h1>
               <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed mb-12">
                 Discover what makes us the preferred choice for organizations worldwide 
@@ -218,7 +218,7 @@ const WhyChooseUs = () => {
                 How We <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Compare</span>
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                See how FWC HRMS outperforms traditional HR solutions across key metrics.
+                See how Mastersolis Infotech outperforms traditional HR solutions across key metrics.
               </p>
             </motion.div>
 
@@ -234,7 +234,7 @@ const WhyChooseUs = () => {
                   <thead className="bg-white/10">
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-semibold text-white">Feature</th>
-                      <th className="px-6 py-4 text-center text-sm font-semibold text-blue-400">FWC HRMS</th>
+                      <th className="px-6 py-4 text-center text-sm font-semibold text-blue-400">Mastersolis Infotech</th>
                       <th className="px-6 py-4 text-center text-sm font-semibold text-gray-300">Competitors</th>
                       <th className="px-6 py-4 text-center text-sm font-semibold text-green-400">Advantage</th>
                     </tr>
@@ -270,7 +270,7 @@ const WhyChooseUs = () => {
               </h2>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Don't just take our word for it – hear from the organizations that have 
-                transformed their HR operations with FWC HRMS.
+                transformed their HR operations with Mastersolis Infotech.
               </p>
             </motion.div>
 
@@ -322,7 +322,7 @@ const WhyChooseUs = () => {
                 Ready to Experience the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Difference?</span>
               </h2>
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                Join thousands of organizations that have chosen FWC HRMS to transform 
+                Join thousands of organizations that have chosen Mastersolis Infotech to transform 
                 their HR operations and achieve remarkable results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

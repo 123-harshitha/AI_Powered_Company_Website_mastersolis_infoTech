@@ -91,7 +91,7 @@ const HomePage = () => {
       name: 'Sarah Johnson',
       role: 'HR Director',
       company: 'TechCorp Inc.',
-      content: 'FWC HRMS has revolutionized our HR operations. The intuitive interface and powerful features have saved us countless hours.',
+      content: 'Mastersolis Infotech has revolutionized our digital presence. The AI-driven solutions and powerful features have transformed our business.',
       avatar: '👩‍💼'
     },
     {
@@ -134,8 +134,8 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">FWC HRMS</h1>
-                <p className="text-sm text-gray-600 font-medium">Human Resource Management System</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">Mastersolis Infotech</h1>
+                <p className="text-sm text-gray-600 font-medium">AI-Driven Digital Solutions</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
@@ -178,16 +178,14 @@ const HomePage = () => {
               🚀 Trusted by 500+ Companies Worldwide
             </div>
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-              Modern HR Management
+              Empowering Businesses with
               <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 animate-gradient-x">
-                Made Simple
+                AI-Driven Digital Solutions
               </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-4xl mx-auto leading-relaxed">
-              Streamline your human resources operations with our comprehensive HRMS platform. 
-              From employee onboarding to performance management, we've got you covered with 
-              <span className="font-semibold text-blue-600"> AI-powered insights</span> and 
-              <span className="font-semibold text-purple-600"> real-time analytics</span>.
+              Crafting Intelligent Web Experiences — AI-Driven, Business-Ready. 
+              We build modern, conversion-focused websites powered by AI — faster, smarter, and tailored for every business.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link
@@ -242,7 +240,7 @@ const HomePage = () => {
               Trusted by Leading Organizations
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Join thousands of companies that have transformed their HR operations with FWC HRMS
+              Join businesses worldwide that have transformed their digital presence with Mastersolis Infotech
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -314,7 +312,7 @@ const HomePage = () => {
               What Our Customers Say
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Don't just take our word for it. Here's what industry leaders have to say about FWC HRMS.
+              Don't just take our word for it. Here's what industry leaders have to say about Mastersolis Infotech.
             </p>
           </div>
           
@@ -369,8 +367,8 @@ const HomePage = () => {
             Transform Your HR Operations Today
           </h2>
           <p className="text-lg text-blue-100 mb-10 max-w-3xl mx-auto leading-relaxed">
-            Join thousands of companies already using FWC HRMS to streamline their human resources. 
-            Start your free trial today and see the difference.
+            Join businesses worldwide already using Mastersolis Infotech to transform their digital presence. 
+            Start your journey today and see the difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link

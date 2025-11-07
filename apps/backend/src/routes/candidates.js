@@ -12,19 +12,30 @@ const { candidateSchemas, validateSchema } = require('../middleware/validation')
 const Queue = require('bull');
 const { Resend } = require('resend');
 
-// Initialize Resend for direct email sending
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend for direct email sending (only if API key is provided)
+let resend = null;
+if (process.env.RESEND_API_KEY) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+} else {
+  console.warn('⚠️  RESEND_API_KEY not found. Email functionality will be disabled.');
+}
 
 // Simple email sending function (no Redis required)
 async function sendEmailDirect(type, to, data) {
+  // Check if Resend is initialized
+  if (!resend) {
+    console.warn(`⚠️  Email sending skipped (${type}): RESEND_API_KEY not configured`);
+    return { success: false, error: 'Email service not configured. RESEND_API_KEY is required.' };
+  }
+
   try {
     const templates = {
       candidate_invitation: {
-        subject: 'Invitation to Join FWC Talent Pool',
+        subject: 'Invitation to Join Mastersolis Infotech Talent Pool',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #2563eb; margin: 0;">FWC HRMS</h1>
+              <h1 style="color: #2563eb; margin: 0;">Mastersolis Infotech</h1>
               <p style="color: #6b7280; margin: 5px 0;">Talent Acquisition Portal</p>
             </div>
             
@@ -32,7 +43,7 @@ async function sendEmailDirect(type, to, data) {
             
             <p>Dear ${data.candidateName || 'Candidate'},</p>
             
-            <p>We are excited to invite you to join our talent pool at FWC. We believe your skills and experience could be a great fit for our organization.</p>
+            <p>We are excited to invite you to join our talent pool at Mastersolis Infotech. We believe your skills and experience could be a great fit for our organization.</p>
             
             <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 20px 0;">
               <h3 style="margin-top: 0; color: #1f2937;">What's Next?</h3>
@@ -64,18 +75,18 @@ async function sendEmailDirect(type, to, data) {
             <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 30px 0;">
             <p style="color: #6b7280; font-size: 14px; text-align: center;">
               Best regards,<br>
-              ${data.invitedByName || 'FWC HR Team'}<br>
-              <strong>FWC Human Resources</strong>
+              ${data.invitedByName || 'Mastersolis Infotech HR Team'}<br>
+              <strong>Mastersolis Infotech Human Resources</strong>
             </p>
           </div>
         `
       },
       new_candidate_registered: {
-        subject: 'New Candidate Registered - FWC HRMS',
+        subject: 'New Candidate Registered - Mastersolis Infotech',
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #2563eb; margin: 0;">FWC HRMS</h1>
+              <h1 style="color: #2563eb; margin: 0;">Mastersolis Infotech</h1>
               <p style="color: #6b7280; margin: 5px 0;">Talent Acquisition Portal</p>
             </div>
             
@@ -109,7 +120,7 @@ async function sendEmailDirect(type, to, data) {
             </div>
             
             <p>Best regards,<br>
-            <strong>FWC HRMS System</strong></p>
+            <strong>Mastersolis Infotech System</strong></p>
           </div>
         `
       },
@@ -118,7 +129,7 @@ async function sendEmailDirect(type, to, data) {
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <h1 style="color: #2563eb; margin: 0;">FWC HRMS</h1>
+              <h1 style="color: #2563eb; margin: 0;">Mastersolis Infotech</h1>
               <p style="color: #6b7280; margin: 5px 0;">Talent Acquisition Portal</p>
             </div>
             
@@ -159,7 +170,7 @@ async function sendEmailDirect(type, to, data) {
             
             <p>Best regards,<br>
             <strong>${data.invitedByName}</strong><br>
-            <strong>FWC Human Resources Team</strong></p>
+            <strong>Mastersolis Infotech Human Resources Team</strong></p>
           </div>
         `
       }
@@ -171,7 +182,7 @@ async function sendEmailDirect(type, to, data) {
     }
 
     const result = await resend.emails.send({
-      from: process.env.RESEND_FROM || 'FWC HRMS <onboarding@resend.dev>',
+      from: process.env.RESEND_FROM || 'Mastersolis Infotech <onboarding@resend.dev>',
       to: [to],
       subject: template.subject,
       html: template.html
@@ -235,7 +246,8 @@ router.post('/register', validateSchema(candidateSchemas.register), async (req, 
     // If invitation token is provided, validate it
     if (invitationToken) {
       try {
-        const decoded = jwt.verify(invitationToken, process.env.JWT_SECRET);
+        const jwtSecret = process.env.JWT_SECRET || 'fwc-hrms-super-secret-jwt-key-2024';
+        const decoded = jwt.verify(invitationToken, jwtSecret);
         if (decoded.email !== email) {
           return res.status(400).json({
             success: false,
@@ -313,6 +325,9 @@ router.post('/register', validateSchema(candidateSchemas.register), async (req, 
       // Don't fail registration if email fails
     }
 
+    // Validate JWT_SECRET for registration token
+    const jwtSecret = process.env.JWT_SECRET || 'fwc-hrms-super-secret-jwt-key-2024';
+
     // Generate JWT token
     const token = jwt.sign(
       { 
@@ -320,7 +335,7 @@ router.post('/register', validateSchema(candidateSchemas.register), async (req, 
         email: candidate.email,
         role: 'CANDIDATE'
       },
-      process.env.JWT_SECRET,
+      jwtSecret,
       { expiresIn: '7d' }
     );
 
@@ -377,6 +392,12 @@ router.post('/login', validateSchema(candidateSchemas.login), async (req, res) =
       });
     }
 
+    // Validate JWT_SECRET is available
+    const jwtSecret = process.env.JWT_SECRET || 'fwc-hrms-super-secret-jwt-key-2024';
+    if (!jwtSecret || jwtSecret === 'your-super-secret-jwt-key-change-this-in-production') {
+      console.error('⚠️  JWT_SECRET not properly configured');
+    }
+
     // Generate JWT token
     const token = jwt.sign(
       { 
@@ -384,7 +405,7 @@ router.post('/login', validateSchema(candidateSchemas.login), async (req, res) =
         email: candidate.email,
         role: 'CANDIDATE'
       },
-      process.env.JWT_SECRET,
+      jwtSecret,
       { expiresIn: '7d' }
     );
 
@@ -848,6 +869,9 @@ router.post('/invite', verifyToken, async (req, res) => {
       });
     }
 
+    // Validate JWT_SECRET for invitation token
+    const jwtSecret = process.env.JWT_SECRET || 'fwc-hrms-super-secret-jwt-key-2024';
+
     // Create invitation record
     const invitation = {
       email,
@@ -855,7 +879,7 @@ router.post('/invite', verifyToken, async (req, res) => {
       invitedBy: req.user._id,
       invitedByName: invitedBy || req.user.name,
       status: 'PENDING',
-      invitationToken: jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' }),
+      invitationToken: jwt.sign({ email }, jwtSecret, { expiresIn: '7d' }),
       createdAt: new Date(),
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7 days
     };
@@ -1198,7 +1222,7 @@ router.post('/invite-to-apply', verifyToken, async (req, res) => {
         candidateName: `${candidate.firstName} ${candidate.lastName}`,
         jobTitle: jobPosting.title,
         department: jobPosting.department,
-        companyName: 'FWC',
+        companyName: 'Mastersolis Infotech',
         invitationMessage: invitation.invitationMessage,
         jobDescription: jobPosting.description,
         applicationLink: `${process.env.FRONTEND_URL || 'http://localhost:5173'}/candidate-portal/jobs/${jobPostingId}`,

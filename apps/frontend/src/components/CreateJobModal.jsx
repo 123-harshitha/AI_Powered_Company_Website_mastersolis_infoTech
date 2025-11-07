@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 import toast from 'react-hot-toast'
-import { jobPostingAPI } from '../services/api'
+import { jobPostingAPI, careerAPI } from '../services/api'
 import Modal from './UI/Modal'
 import Button from './UI/Button'
 import Icon from './UI/Icon'
@@ -21,11 +21,13 @@ const CreateJobModal = ({ isOpen, onClose, onSuccess, departments = [] }) => {
     experienceLevel: 'MID_LEVEL',
     salaryRange: '',
     description: '',
+    summary: '',
     requirements: '',
     responsibilities: '',
     benefits: '',
     applicationDeadline: ''
   })
+  const [generatingDescription, setGeneratingDescription] = useState(false)
 
   const createJobMutation = useMutation(
     (data) => jobPostingAPI.create(data),
@@ -53,11 +55,13 @@ const CreateJobModal = ({ isOpen, onClose, onSuccess, departments = [] }) => {
       experienceLevel: 'MID_LEVEL',
       salaryRange: '',
       description: '',
+      summary: '',
       requirements: '',
       responsibilities: '',
       benefits: '',
       applicationDeadline: ''
     })
+    setGeneratingDescription(false)
   }
 
   const handleInputChange = (e) => {
@@ -66,6 +70,40 @@ const CreateJobModal = ({ isOpen, onClose, onSuccess, departments = [] }) => {
       ...prev,
       [name]: value
     }))
+  }
+
+  const handleGenerateDescription = async () => {
+    if (!formData.title || !formData.department) {
+      toast.error('Please enter job title and department first')
+      return
+    }
+
+    setGeneratingDescription(true)
+    try {
+      const response = await careerAPI.generateDescription({
+        title: formData.title,
+        department: formData.department,
+        location: formData.location || 'Remote',
+        type: formData.employmentType,
+        summary: formData.summary || ''
+      })
+
+      if (response.success) {
+        setFormData(prev => ({
+          ...prev,
+          description: response.data.description,
+          summary: response.data.description.substring(0, 200) + '...'
+        }))
+        toast.success('AI-generated description created!')
+      } else {
+        toast.error('Failed to generate description')
+      }
+    } catch (error) {
+      console.error('Error generating description:', error)
+      toast.error('Failed to generate description. Please try again.')
+    } finally {
+      setGeneratingDescription(false)
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -90,6 +128,7 @@ const CreateJobModal = ({ isOpen, onClose, onSuccess, departments = [] }) => {
     // Transform requirements and responsibilities to arrays if they're strings
     const processedData = {
       ...formData,
+      summary: formData.summary || formData.description?.substring(0, 200) + '...',
       requirements: formData.requirements ? formData.requirements.split('\n').filter(req => req.trim()) : [],
       responsibilities: formData.responsibilities ? formData.responsibilities.split('\n').filter(resp => resp.trim()) : [],
       benefits: formData.benefits ? formData.benefits.split('\n').filter(benefit => benefit.trim()) : [],
@@ -237,23 +276,66 @@ const CreateJobModal = ({ isOpen, onClose, onSuccess, departments = [] }) => {
 
           {/* Job Description */}
           <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Job Description</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold text-gray-900">Job Description</h3>
+              <button
+                type="button"
+                onClick={handleGenerateDescription}
+                disabled={generatingDescription || !formData.title || !formData.department}
+                className="flex items-center px-3 py-1.5 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg hover:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {generatingDescription ? (
+                  <>
+                    <LoadingSpinner size="sm" />
+                    <span className="ml-2">Generating...</span>
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Generate with AI
+                  </>
+                )}
+              </button>
+            </div>
             
             <div className="space-y-4">
               <div>
+                <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-2">
+                  Summary (80-150 words) *
+                </label>
+                <textarea
+                  id="summary"
+                  name="summary"
+                  value={formData.summary}
+                  onChange={handleInputChange}
+                  rows={2}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="Brief summary of the role (will be auto-generated if description is provided)..."
+                />
+                <p className="text-xs text-gray-500 mt-1">
+                  {formData.summary ? `${formData.summary.split(' ').length} words` : 'Short summary for job listings'}
+                </p>
+              </div>
+
+              <div>
                 <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-2">
-                  Description *
+                  Full Description *
                 </label>
                 <textarea
                   id="description"
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  rows={4}
+                  rows={6}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Describe the role, company culture, and what makes this position exciting..."
                   required
                 />
+                <p className="text-xs text-gray-500 mt-1">
+                  {formData.description ? `${formData.description.split(' ').length} words` : 'AI will generate a professional description (80-150 words)'}
+                </p>
               </div>
 
               <div>

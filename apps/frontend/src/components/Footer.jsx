@@ -8,7 +8,10 @@ import { staggerContainer, itemFadeIn } from './motionVariants'
  * Footer Link Component
  * Individual footer link with hover effects and proper navigation handling
  */
-const FooterLink = ({ href, children, external = false, ...props }) => {
+const FooterLink = ({ href, children, external = false, className = "", ...props }) => {
+  const baseClasses = "text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm cursor-pointer"
+  const combinedClasses = `${baseClasses} ${className}`.trim()
+  
   if (external) {
     return (
       <motion.div
@@ -19,7 +22,7 @@ const FooterLink = ({ href, children, external = false, ...props }) => {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm cursor-pointer"
+          className={combinedClasses}
           {...props}
         >
           {children}
@@ -35,7 +38,7 @@ const FooterLink = ({ href, children, external = false, ...props }) => {
     >
       <Link
         to={href}
-        className="text-gray-300 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-sm cursor-pointer"
+        className={combinedClasses}
         {...props}
       >
         {children}
@@ -65,11 +68,21 @@ const SocialLink = ({ href, icon, label }) => {
 }
 
 /**
- * Footer Component - FWC Design System
+ * Footer Component - Mastersolis Infotech Design System
  * Multi-column footer with office addresses, social links, and company information
  */
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+
+  // Main navigation links (prominently displayed)
+  const mainNavigationLinks = [
+    { href: '/', label: 'Mastersolis Infotech' },
+    { href: '/who-we-serve', label: 'Who we serve' },
+    { href: '/what-we-do', label: 'What we do' },
+    { href: '/who-we-are', label: 'Who we are' },
+    { href: '/why-choose-us', label: 'Why choose us' },
+    { href: '/contact', label: 'Contact' }
+  ]
 
   const footerSections = [
     {
@@ -119,26 +132,16 @@ const Footer = () => {
 
   const offices = [
     {
-      city: 'New York',
-      address: '123 Business Ave, Suite 100',
-      details: 'New York, NY 10001, USA'
-    },
-    {
-      city: 'London',
-      address: '45 Innovation Street',
-      details: 'London EC1A 4HD, UK'
-    },
-    {
-      city: 'Singapore',
-      address: '78 Tech Hub Plaza',
-      details: 'Singapore 018956'
+      city: 'Bengaluru',
+      address: 'Innovation Hub, 4th Floor, Techpark',
+      details: 'Bengaluru, Karnataka, India'
     }
   ]
 
   const socialLinks = [
-    { href: 'https://linkedin.com/company/fwc-hrms', icon: 'linkedin', label: 'LinkedIn' },
-    { href: 'https://twitter.com/fwc_hrms', icon: 'twitter', label: 'Twitter' },
-    { href: 'https://facebook.com/fwc.hrms', icon: 'facebook', label: 'Facebook' }
+    { href: 'https://www.instagram.com/mastersolis_infotech/', icon: 'instagram', label: 'Instagram' },
+    { href: 'https://www.facebook.com/mastersolis', icon: 'facebook', label: 'Facebook' },
+    { href: 'https://www.linkedin.com/company/mastersolis', icon: 'linkedin', label: 'LinkedIn' }
   ]
 
   return (
@@ -155,18 +158,23 @@ const Footer = () => {
               viewport={{ once: true }}
               className="lg:col-span-4 space-y-6"
             >
-              {/* Logo */}
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-md">
-                  <span className="text-white font-bold text-xl">F</span>
-                </div>
-                <span className="text-2xl font-bold font-heading">FWC HRMS</span>
-              </div>
+              {/* Logo - Clickable link to home */}
+              <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <img 
+                  src="/logo.jpg" 
+                  alt="Mastersolis Infotech Logo" 
+                  className="w-10 h-10 rounded-xl object-contain shadow-md"
+                  onError={(e) => {
+                    console.warn('Logo image failed to load:', e.target.src)
+                  }}
+                />
+                <span className="text-2xl font-bold font-heading">Mastersolis Infotech</span>
+              </Link>
 
               {/* Description */}
               <p className="text-gray-300 leading-relaxed max-w-md">
-                Empowering organizations worldwide with comprehensive Human Resource Management 
-                solutions that streamline operations and enhance employee experiences.
+                Crafting Intelligent Web Experiences — AI-Driven, Business-Ready. 
+                Empowering businesses with intelligent, automated website and content solutions.
               </p>
 
               {/* Social Links */}
@@ -182,30 +190,50 @@ const Footer = () => {
               </div>
             </motion.div>
 
-            {/* Footer Sections */}
+            {/* Main Navigation Links - Prominently Displayed */}
             <motion.div
-              variants={staggerContainer}
+              variants={itemFadeIn}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="lg:col-span-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8"
+              className="lg:col-span-8"
             >
-              {footerSections.map((section, index) => (
-                <motion.div key={section.title} variants={itemFadeIn}>
-                  <h3 className="text-lg font-semibold mb-4 text-white">
-                    {section.title}
-                  </h3>
-                  <ul className="space-y-3">
-                    {section.links.map((link) => (
-                      <li key={link.label}>
-                        <FooterLink href={link.href}>
-                          {link.label}
-                        </FooterLink>
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
+              <div className="mb-8 pb-8 border-b border-gray-800">
+                <h3 className="text-lg font-semibold mb-4 text-white">Navigation</h3>
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  {mainNavigationLinks.map((link) => (
+                    <FooterLink key={link.label} href={link.href} className="text-base font-medium">
+                      {link.label}
+                    </FooterLink>
+                  ))}
+                </div>
+              </div>
+
+              {/* Footer Sections */}
+              <motion.div
+                variants={staggerContainer}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 sm:gap-8"
+              >
+                {footerSections.map((section, index) => (
+                  <motion.div key={section.title} variants={itemFadeIn}>
+                    <h3 className="text-lg font-semibold mb-4 text-white">
+                      {section.title}
+                    </h3>
+                    <ul className="space-y-3">
+                      {section.links.map((link) => (
+                        <li key={link.label}>
+                          <FooterLink href={link.href}>
+                            {link.label}
+                          </FooterLink>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </motion.div>
             </motion.div>
           </div>
 
@@ -250,10 +278,10 @@ const Footer = () => {
         >
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
             <div className="text-gray-400 text-sm">
-              © {currentYear} FWC HRMS. All rights reserved.
+              © {currentYear} Mastersolis Infotech. All rights reserved.
             </div>
             <div className="flex items-center space-x-6 text-sm text-gray-400">
-              <span>Made with ❤️ for HR professionals</span>
+              <span>Crafted with AI.</span>
               <div className="flex items-center space-x-2">
                 <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
                 <span>All systems operational</span>

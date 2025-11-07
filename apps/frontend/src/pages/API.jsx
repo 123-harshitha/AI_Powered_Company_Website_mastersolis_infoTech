@@ -158,14 +158,14 @@ Content-Type: application/json
     {
       language: 'JavaScript',
       code: `// Install the SDK
-npm install @fwchrms/sdk
+npm install @mastersolis/sdk
 
 // Initialize the client
-import { FWCClient } from '@fwchrms/sdk';
+import { MastersolisClient } from '@mastersolis/sdk';
 
-const client = new FWCClient({
+const client = new MastersolisClient({
   apiKey: 'your_api_key',
-  baseUrl: 'https://api.fwchrms.com'
+  baseUrl: 'https://api.mastersolis.com'
 });
 
 // Get employees
@@ -184,14 +184,14 @@ const newEmployee = await client.employees.create({
     {
       language: 'Python',
       code: `# Install the SDK
-pip install fwchrms-sdk
+pip install mastersolis-sdk
 
 # Initialize the client
-from fwchrms import FWCClient
+from mastersolis import MastersolisClient
 
-client = FWCClient(
+client = MastersolisClient(
     api_key='your_api_key',
-    base_url='https://api.fwchrms.com'
+    base_url='https://api.mastersolis.com'
 )
 
 # Get employees
@@ -211,14 +211,14 @@ new_employee = client.employees.create({
       language: 'PHP',
       code: `<?php
 // Install via Composer
-composer require fwchrms/php-sdk
+composer require mastersolis/php-sdk
 
 // Initialize the client
-use FWC\FWCClient;
+use Mastersolis\MastersolisClient;
 
-$client = new FWCClient([
+$client = new MastersolisClient([
     'api_key' => 'your_api_key',
-    'base_url' => 'https://api.fwchrms.com'
+    'base_url' => 'https://api.mastersolis.com'
 ]);
 
 // Get employees
@@ -252,7 +252,7 @@ $newEmployee = $client->employees()->create([
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>
@@ -269,7 +269,7 @@ $newEmployee = $client->employees()->create([
               API Documentation
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Integrate FWC HRMS with your existing systems using our RESTful API. 
+              Integrate Mastersolis Infotech with your existing systems using our RESTful API. 
               Access all HR data and functionality programmatically.
             </p>
           </div>
@@ -403,7 +403,7 @@ $newEmployee = $client->employees()->create([
                     Ready to Get Started?
                   </h2>
                   <p className="text-blue-100 mb-6">
-                    Get your API key and start integrating FWC HRMS with your applications today.
+                    Get your API key and start integrating Mastersolis Infotech with your applications today.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-6 rounded-lg transition-colors duration-200">

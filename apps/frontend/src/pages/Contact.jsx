@@ -31,17 +31,17 @@ const Contact = () => {
   // QR Code component for address
   const QRCodeComponent = () => {
     const addressData = {
-      name: "FWC IT SERVICES PRIVATE LIMITED",
-      address: "4th Floor, 1348, 7th Avenue, opposite Yes Bank, Jayanagara 9th Block, Jayanagar, Bengaluru, Karnataka 560041",
-      phone: "+91 8026 597 566",
-      email: "hr@fwc.co.in",
-      website: "https://fwc.co.in"
+      name: "Mastersolis Infotech",
+      address: "Innovation Hub, 4th Floor, Techpark, Bengaluru, Karnataka, India",
+      phone: "+91-80-1234-5678",
+      email: "hello@mastersolis.com",
+      website: "https://mastersolis.com"
     }
     
     const qrValue = `BEGIN:VCARD
 VERSION:3.0
 FN:${addressData.name}
-ORG:FWC IT SERVICES PRIVATE LIMITED
+ORG:Mastersolis Infotech
 ADR:;;${addressData.address};;;;
 TEL:${addressData.phone}
 EMAIL:${addressData.email}
@@ -77,7 +77,7 @@ END:VCARD`
           allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
-          title="FWC IT Services Location - Jayanagar, Bengaluru"
+          title="Mastersolis Infotech Location - Bengaluru, India"
           className="rounded-lg sm:rounded-xl"
         />
       </div>
@@ -108,7 +108,7 @@ END:VCARD`
               Get in Touch With Us
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-              Reach out to us for inquiries, collaborations, or to discuss your project needs. We're here to help you succeed.
+              Reach out to us for inquiries, collaborations, or to request a demo. We're here to help you transform your digital presence.
             </p>
           </div>
 
@@ -283,7 +283,7 @@ END:VCARD`
                     type="submit"
                     className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:from-blue-700 hover:to-purple-700 font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg sm:rounded-xl transition-all duration-300 text-base sm:text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
                   >
-                    Send Message Now
+                    Request a Demo
                   </button>
                 </form>
               </div>
@@ -304,8 +304,7 @@ END:VCARD`
                     </div>
                   </div>
                   <div className="space-y-2 sm:space-y-3">
-                    <a href="mailto:hr@fwc.co.in" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium break-all">hr@fwc.co.in</a>
-                    <a href="mailto:support@fwc.co.in" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium break-all">support@fwc.co.in</a>
+                    <a href="mailto:hello@mastersolis.com" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium break-all">hello@mastersolis.com</a>
                   </div>
                 </div>
 
@@ -320,8 +319,7 @@ END:VCARD`
                     <h3 className="text-lg sm:text-xl font-bold text-white">Phone</h3>
                   </div>
                   <div className="space-y-2 sm:space-y-3">
-                    <a href="tel:+918026597566" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium">🇮🇳 India: +91 8026 597 566</a>
-                    <a href="tel:+14089142832" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium">🌍 Global: +1 (408) 914-2832</a>
+                    <a href="tel:+918012345678" className="block text-blue-400 hover:text-blue-300 transition-colors duration-200 text-sm sm:text-base lg:text-lg font-medium">🇮🇳 India: +91-80-1234-5678</a>
                   </div>
                 </div>
 
@@ -341,10 +339,9 @@ END:VCARD`
                   </div>
                   <div className="mb-4 sm:mb-6">
                     <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
-                      <span className="font-semibold text-white">FWC IT SERVICES PRIVATE LIMITED</span><br />
-                      4th Floor, 1348, 7th Avenue, opposite Yes Bank,<br />
-                      Jayanagara 9th Block, Jayanagar,<br />
-                      Bengaluru, Karnataka 560041
+                      <span className="font-semibold text-white">Mastersolis Infotech</span><br />
+                      Innovation Hub, 4th Floor, Techpark,<br />
+                      Bengaluru, Karnataka, India
                     </p>
                   </div>
                   <QRCodeComponent />
@@ -363,7 +360,7 @@ END:VCARD`
                   <MapComponent />
                   <div className="mt-3 sm:mt-4 text-center">
                     <a 
-                      href="https://maps.google.com/?q=FWC+IT+SERVICES+PRIVATE+LIMITED+Jayanagar+Bengaluru" 
+                      href="https://www.google.com/maps/dir/13.0220032,76.0971264/12.97891,77.64313/@12.9994313,75.5505115,8z/data=!3m1!4b1!4m4!4m3!1m1!4e1!1m0?entry=ttu&g_ep=EgoyMDI1MTEwNC4xIKXMDSoASAFQAw%3D%3D" 
                       target="_blank" 
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-4 py-2 sm:px-6 sm:py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg sm:rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 text-sm sm:text-base"

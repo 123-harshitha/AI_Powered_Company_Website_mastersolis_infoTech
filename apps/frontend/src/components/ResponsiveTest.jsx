@@ -74,7 +74,7 @@ const ResponsiveTest = () => {
               Responsive Design Test
             </h1>
             <p className="text-base sm:text-lg text-gray-600 max-w-3xl mx-auto">
-              This page demonstrates the responsive capabilities of the FWC HRMS design system.
+              This page demonstrates the responsive capabilities of the Mastersolis Infotech design system.
               Resize your browser window to see how components adapt to different screen sizes.
             </p>
             

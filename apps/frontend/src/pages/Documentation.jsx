@@ -55,8 +55,8 @@ const Documentation = () => {
   const documentation = {
     'getting-started': [
       {
-        title: 'Welcome to FWC HRMS',
-        content: 'FWC HRMS is a comprehensive human resource management system designed to streamline HR operations for businesses of all sizes. This guide will help you get started with the platform.',
+        title: 'Welcome to Mastersolis Infotech',
+        content: 'Mastersolis Infotech is a comprehensive human resource management system designed to streamline HR operations for businesses of all sizes. This guide will help you get started with the platform.',
         steps: [
           'Create your account and complete the initial setup',
           'Configure your organization settings',
@@ -78,7 +78,7 @@ const Documentation = () => {
       },
       {
         title: 'First Steps',
-        content: 'Once your account is set up, here are the recommended first steps to get the most out of FWC HRMS.',
+        content: 'Once your account is set up, here are the recommended first steps to get the most out of Mastersolis Infotech.',
         steps: [
           'Add your first employee records',
           'Set up attendance tracking',
@@ -198,7 +198,7 @@ const Documentation = () => {
     'api': [
       {
         title: 'API Authentication',
-        content: 'Learn how to authenticate with the FWC HRMS API using API keys and tokens.',
+        content: 'Learn how to authenticate with the Mastersolis Infotech API using API keys and tokens.',
         steps: [
           'Generate API key from Settings',
           'Include API key in request headers',
@@ -254,7 +254,7 @@ const Documentation = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>
@@ -271,7 +271,7 @@ const Documentation = () => {
               Documentation
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Comprehensive guides and references to help you get the most out of FWC HRMS. 
+              Comprehensive guides and references to help you get the most out of Mastersolis Infotech. 
               Find everything you need to set up, configure, and use our platform effectively.
             </p>
           </div>
@@ -361,7 +361,7 @@ const Documentation = () => {
                     </h3>
                   </div>
                   <p className="text-blue-800 mb-4">
-                    Can't find what you're looking for? Our support team is here to help you get the most out of FWC HRMS.
+                    Can't find what you're looking for? Our support team is here to help you get the most out of Mastersolis Infotech.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
                     <button className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-lg font-medium transition-colors duration-200">

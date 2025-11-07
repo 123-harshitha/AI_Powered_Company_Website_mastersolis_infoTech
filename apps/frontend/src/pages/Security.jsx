@@ -83,7 +83,7 @@ const Security = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>

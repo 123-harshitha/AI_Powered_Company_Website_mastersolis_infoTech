@@ -8,6 +8,7 @@ import CaseCarousel from '../components/CaseCarousel'
 import IndustryGrid from '../components/IndustryGrid'
 import CTASection from '../components/CTASection'
 import Footer from '../components/Footer'
+import Chatbot from '../components/Chatbot'
 import PageTransition from '../components/PageTransition'
 import { pageVariants } from '../components/motionVariants'
 
@@ -45,6 +46,9 @@ const Home = () => {
 
         {/* Footer */}
         <Footer />
+
+        {/* Chatbot */}
+        <Chatbot />
       </div>
     </PageTransition>
   )

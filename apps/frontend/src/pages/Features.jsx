@@ -80,7 +80,7 @@ const Features = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>
@@ -127,7 +127,7 @@ const Features = () => {
                 Ready to Experience These Features?
               </h2>
               <p className="text-blue-100 mb-6">
-                Start your free trial today and see how FWC HRMS can transform your HR operations.
+                Start your free trial today and see how Mastersolis Infotech can transform your HR operations.
               </p>
               <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
                 Start Free Trial

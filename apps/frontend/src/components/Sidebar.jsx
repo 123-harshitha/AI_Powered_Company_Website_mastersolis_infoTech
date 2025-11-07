@@ -183,7 +183,7 @@ const Sidebar = () => {
               </svg>
             </div>
             <div className="ml-3">
-              <h1 className="text-white text-lg font-semibold">FWC HRMS</h1>
+              <h1 className="text-white text-lg font-semibold">Mastersolis Infotech</h1>
             </div>
           </div>
         </div>

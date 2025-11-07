@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 /**
- * Logo Component - FWC Standard Logo
+ * Logo Component - Mastersolis Infotech Standard Logo
  * Reusable logo component with consistent styling across the application
  */
 const Logo = ({ 
@@ -53,17 +53,16 @@ const Logo = ({
         whileHover={animated ? { scale: 1.05 } : {}}
         whileTap={animated ? { scale: 0.95 } : {}}
       >
-        {/* FWC Logo Image */}
+        {/* Mastersolis Infotech Logo Image */}
         <img 
-          src="/fwc_logo.avif" 
-          alt="FWC HRMS Logo" 
-          className="w-full h-full object-contain"
+          src="/logo.jpg" 
+          alt="Mastersolis Infotech Logo" 
+          className="w-full h-full object-contain rounded-xl shadow-md"
           loading="lazy"
           onError={(e) => {
-            // Try SVG fallback
-            if (e.target.src.includes('.avif')) {
-              e.target.src = '/logo.svg'
-            } else if (e.target.src.includes('.svg')) {
+            console.warn('Logo image failed to load:', e.target.src)
+            // Try fallback
+            if (e.target.src.includes('.jpg')) {
               e.target.src = '/logo.png'
             } else {
               // If all images fail, show fallback logo
@@ -72,13 +71,13 @@ const Logo = ({
             }
           }}
         />
-        {/* Fallback FWC logo */}
+        {/* Fallback Mastersolis Infotech logo */}
         <div 
-          className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex flex-col items-center justify-center shadow-lg"
+          className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex flex-col items-center justify-center shadow-md"
           style={{ display: 'none' }}
         >
-          <span className="text-white font-bold text-lg">FWC</span>
-          <span className="text-blue-200 text-xs">HRMS</span>
+          <span className="text-white font-bold text-[9px] leading-tight">Mastersolis</span>
+          <span className="text-blue-200 text-[7px] leading-tight">HRMS</span>
         </div>
       </motion.div>
       
@@ -90,7 +89,7 @@ const Logo = ({
             ? 'text-gray-900 group-hover:text-blue-600'
             : 'text-gray-900 group-hover:text-blue-600'
         } transition-all duration-300`}>
-          FWC HRMS
+          Mastersolis Infotech
         </span>
       )}
     </div>

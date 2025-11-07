@@ -4,33 +4,27 @@ import Footer from '../components/Footer'
 const About = () => {
   const team = [
     {
-      name: 'Sarah Johnson',
-      role: 'CEO & Founder',
+      name: 'Asha Kumar',
+      role: 'CEO',
       image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-      bio: 'Former HR Director with 15+ years experience in enterprise HR management.'
+      bio: 'Visionary leader driving AI-powered digital transformation for businesses worldwide.'
     },
     {
-      name: 'Michael Chen',
+      name: 'Vikram Joshi',
       role: 'CTO',
       image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      bio: 'Tech leader with expertise in scalable SaaS platforms and AI integration.'
+      bio: 'Tech innovator with expertise in AI-driven solutions and scalable web platforms.'
     },
     {
-      name: 'Emily Rodriguez',
-      role: 'Head of Product',
+      name: 'Rhea Das',
+      role: 'Head of Design',
       image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      bio: 'Product strategist focused on user experience and HR workflow optimization.'
-    },
-    {
-      name: 'David Kim',
-      role: 'Head of Engineering',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80',
-      bio: 'Full-stack engineer passionate about building robust and scalable systems.'
+      bio: 'Creative strategist focused on user-centric AI design and conversion optimization.'
     }
   ]
 
   const milestones = [
-    { year: '2020', event: 'FWC HRMS founded with vision to simplify HR management' },
+    { year: '2020', event: 'Mastersolis Infotech founded with vision to simplify HR management' },
     { year: '2021', event: 'Launched MVP with core employee management features' },
     { year: '2022', event: 'Reached 1,000+ active users across 50+ companies' },
     { year: '2023', event: 'Introduced AI-powered features and advanced analytics' },
@@ -52,8 +46,8 @@ const About = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
-                <p className="text-sm text-gray-500">Human Resource Management System</p>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
+                <p className="text-sm text-gray-500">AI-Driven Digital Solutions</p>
               </div>
             </div>
           </div>
@@ -66,11 +60,10 @@ const About = () => {
           {/* Hero Section */}
           <div className="text-center mb-16">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              About FWC HRMS
+              About Mastersolis Infotech
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're on a mission to revolutionize human resource management by making it simple, 
-              efficient, and accessible for businesses of all sizes.
+              Mastersolis Infotech automates digital presence — building smart websites, recruitment tools, and AI dashboards.
             </p>
           </div>
 
@@ -80,41 +73,39 @@ const About = () => {
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h2>
                 <p className="text-gray-600 mb-4">
-                  At FWC HRMS, we believe that managing human resources shouldn't be complicated. 
-                  Our mission is to provide businesses with intuitive, powerful tools that streamline 
-                  HR processes and empower teams to focus on what matters most - their people.
+                  Empower every business with automated website and content solutions.
                 </p>
-                <p className="text-gray-600">
-                  We're committed to creating software that grows with your business, adapts to 
-                  your needs, and makes HR management a seamless part of your daily operations.
+                <h2 className="text-3xl font-bold text-gray-900 mb-4 mt-8">Our Vision</h2>
+                <p className="text-gray-600 mb-4">
+                  Lead the world in AI-powered business websites.
                 </p>
               </div>
               <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-8">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Values</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Our Core Values</h3>
                 <ul className="space-y-3">
                   <li className="flex items-center text-gray-700">
                     <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Simplicity in design and functionality
+                    Innovation
                   </li>
                   <li className="flex items-center text-gray-700">
                     <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Security and privacy first
+                    Quality-First Design
                   </li>
                   <li className="flex items-center text-gray-700">
                     <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Continuous innovation
+                    User-Centric AI
                   </li>
                   <li className="flex items-center text-gray-700">
                     <svg className="h-5 w-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    Customer-centric approach
+                    Data-Driven Results
                   </li>
                 </ul>
               </div>
@@ -198,7 +189,7 @@ const About = () => {
                 Join Our Mission
               </h2>
               <p className="text-blue-100 mb-6">
-                Be part of the future of HR management. Experience the difference with FWC HRMS.
+                Be part of the future of AI-driven digital solutions. Experience the difference with Mastersolis Infotech.
               </p>
               <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
                 Get Started Today

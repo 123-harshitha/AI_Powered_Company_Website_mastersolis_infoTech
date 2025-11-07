@@ -7,24 +7,61 @@ class Database {
     this.isConnected = false;
   }
 
-  async connect() {
-    try {
-      const uri = process.env.DATABASE_URL || "mongodb://localhost:27017/HRMS";
-      
-      this.client = new MongoClient(uri);
+  async connect(retries = 3, delay = 2000) {
+    const uri = process.env.DATABASE_URL || "mongodb://127.0.0.1:27017/HRMS";
+    
+    // Normalize URI to use IPv4 if it's localhost
+    const normalizedUri = uri.replace(/mongodb:\/\/localhost:/, 'mongodb://127.0.0.1:');
+    
+    for (let attempt = 1; attempt <= retries; attempt++) {
+      try {
+        console.log(`🔄 Attempting to connect to MongoDB (attempt ${attempt}/${retries})...`);
+        
+        this.client = new MongoClient(normalizedUri, {
+          serverSelectionTimeoutMS: 5000,
+          connectTimeoutMS: 5000,
+        });
 
-      await this.client.connect();
-      this.db = this.client.db('HRMS');
-      this.isConnected = true;
-      
-      console.log('✅ Connected to MongoDB successfully');
-      console.log('📊 Database: HRMS');
-      
-      return this.db;
-    } catch (error) {
-      console.error('❌ MongoDB connection error:', error);
-      throw error;
+        await this.client.connect();
+        this.db = this.client.db('HRMS');
+        this.isConnected = true;
+        
+        console.log('✅ Connected to MongoDB successfully');
+        console.log('📊 Database: HRMS');
+        
+        return this.db;
+      } catch (error) {
+        console.warn(`⚠️  MongoDB connection attempt ${attempt} failed:`, error.message);
+          
+        if (this.client) {
+          try {
+            await this.client.close();
+          } catch (closeError) {
+            // Ignore close errors
+          }
+          this.client = null;
+        }
+        
+        if (attempt === retries) {
+          console.error('❌ MongoDB connection failed after all retries');
+          console.error('💡 Make sure MongoDB is running:');
+          console.error('   - Windows: net start MongoDB');
+          console.error('   - Or install MongoDB: https://www.mongodb.com/try/download/community');
+          console.error('   - Or use MongoDB Atlas: https://www.mongodb.com/cloud/atlas');
+          console.error('⚠️  Server will start without database connection. Some features may not work.');
+          this.isConnected = false;
+          return null;
+        }
+        
+        // Wait before retrying
+        if (attempt < retries) {
+          console.log(`⏳ Retrying in ${delay/1000} seconds...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+      }
     }
+    
+    return null;
   }
 
   async disconnect() {
@@ -36,8 +73,8 @@ class Database {
   }
 
   getCollection(name) {
-    if (!this.isConnected) {
-      throw new Error('Database not connected. Call connect() first.');
+    if (!this.isConnected || !this.db) {
+      throw new Error('Database not connected. Please ensure MongoDB is running and call connect() first.');
     }
     return this.db.collection(name);
   }
@@ -81,6 +118,11 @@ class Database {
 
   // Create indexes for better performance
   async createIndexes() {
+    if (!this.isConnected || !this.db) {
+      console.warn('⚠️  Skipping index creation: Database not connected');
+      return;
+    }
+    
     try {
       console.log('📊 Creating database indexes...');
       

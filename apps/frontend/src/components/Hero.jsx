@@ -7,7 +7,7 @@ import DemoVideoModal from './DemoVideoModal'
 import { heroTitleVariants, heroSubtitleVariants, heroButtonsVariants, heroCardsVariants } from './motionVariants'
 
 /**
- * Hero Component - FWC Design System
+ * Hero Component - Mastersolis Infotech Design System
  * Professional hero section with interactive dashboard mockup and advanced animations
  */
 const Hero = () => {
@@ -120,14 +120,16 @@ const Hero = () => {
               className="space-y-6"
             >
               <h1 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 leading-[1.1] tracking-tight">
-                We Engineer Your Success for the{' '}
+                Empowering Businesses with{' '}
                 <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent">
-                  Digital Future
+                  AI-Driven Digital Solutions
                 </span>
               </h1>
-              <p className="text-lg lg:text-xl text-gray-600 max-w-2xl leading-relaxed">
-                Transform your HR operations with our comprehensive Human Resource Management System. 
-                Streamline processes, boost productivity, and empower your workforce with cutting-edge technology.
+              <p className="text-lg lg:text-xl text-gray-600 max-w-2xl leading-relaxed mb-4">
+                Crafting Intelligent Web Experiences — AI-Driven, Business-Ready.
+              </p>
+              <p className="text-base lg:text-lg text-gray-600 max-w-2xl leading-relaxed">
+                Mastersolis Infotech revolutionizes how businesses build their digital identity using AI-powered automation to launch, customize, and optimize entire business websites. Key Highlights: 10× faster creation, real-time analytics, integrated HR tools, and AI chatbots.
               </p>
             </motion.div>
 
@@ -143,7 +145,7 @@ const Hero = () => {
                 onClick={() => window.location.href = '/login'}
               >
                 <Icon name="star" size="lg" className="mr-2" />
-                Start Free Trial
+                Explore Our Solutions
               </Button>
               <Button 
                 variant="ghost" 

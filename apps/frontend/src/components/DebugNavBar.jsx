@@ -36,12 +36,12 @@ const DebugNavBar = () => {
             className="-m-1.5 p-1.5 flex items-center group transition-all duration-200 hover:scale-105"
             title="Go to Home Page"
           >
-            <span className="sr-only">FWC HRMS - Go to Home</span>
+            <span className="sr-only">Mastersolis Infotech - Go to Home</span>
             <div className="h-8 w-8 sm:h-10 sm:w-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center shadow-md">
               <span className="text-white font-bold text-lg sm:text-xl">F</span>
             </div>
             <span className="ml-2 sm:ml-3 text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-200">
-              FWC HRMS
+              Mastersolis Infotech
             </span>
           </Link>
         </div>

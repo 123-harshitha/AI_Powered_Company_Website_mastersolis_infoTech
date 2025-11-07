@@ -74,7 +74,7 @@ const Integrations = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>
@@ -90,7 +90,7 @@ const Integrations = () => {
               Integrations
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Connect FWC HRMS with your favorite tools and services to create a seamless HR workflow.
+              Connect Mastersolis Infotech with your favorite tools and services to create a seamless HR workflow.
             </p>
           </div>
 
@@ -171,7 +171,7 @@ const Integrations = () => {
                 Ready to Connect Your Tools?
               </h2>
               <p className="text-blue-100 mb-6">
-                Start integrating FWC HRMS with your existing systems today.
+                Start integrating Mastersolis Infotech with your existing systems today.
               </p>
               <button className="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg transition-colors duration-200">
                 View API Documentation

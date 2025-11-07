@@ -346,6 +346,62 @@ export const aiAPI = {
     api.post('/ai/predict/workload', { departmentId }),
 }
 
+// Career Page API (public endpoints)
+const API_BASE_URL = 'http://localhost:3001/api'
+
+export const careerAPI = {
+  getJobs: (params = {}) => {
+    const queryParams = new URLSearchParams(params).toString();
+    return fetch(`${API_BASE_URL}/job-postings/career-page${queryParams ? `?${queryParams}` : ''}`)
+      .then(res => res.json());
+  },
+  
+  getJob: (id) => 
+    fetch(`${API_BASE_URL}/job-postings/career-page/${id}`)
+      .then(res => res.json()),
+  
+  apply: (formData) => {
+    return fetch(`${API_BASE_URL}/career/apply`, {
+      method: 'POST',
+      body: formData
+    }).then(res => res.json());
+  },
+  
+  getCultureBenefits: () => 
+    fetch(`${API_BASE_URL}/career/culture-benefits`)
+      .then(res => res.json()),
+  
+  generateDescription: (data) => 
+    fetch(`${API_BASE_URL}/career/generate-description`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(data)
+    }).then(res => res.json()),
+  
+  sendInterviewInvitation: (data) => 
+    fetch(`${API_BASE_URL}/career/send-interview-invitation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(data)
+    }).then(res => res.json()),
+  
+  sendDecisionEmail: (data) => 
+    fetch(`${API_BASE_URL}/career/send-decision-email`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(data)
+    }).then(res => res.json())
+}
+
 // Recruitment API (legacy - keeping for backward compatibility)
 export const recruitmentAPI = {
   getJobPostings: ({ status, department } = {}) => 
@@ -589,6 +645,16 @@ export const interviewsAPI = {
   
   // Cancel interview
   cancelInterview: (interviewId, data) => api.put(`/interviews/${interviewId}/cancel`, data)
+}
+
+// Services API
+export const servicesAPI = {
+  getAll: () => api.get('/services'),
+  getById: (id) => api.get(`/services/${id}`),
+  create: (data) => api.post('/services', data),
+  update: (id, data) => api.put(`/services/${id}`, data),
+  delete: (id) => api.delete(`/services/${id}`),
+  generateDescriptions: (data) => api.post('/services/generate-descriptions', data)
 }
 
 // Test API endpoints

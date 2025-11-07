@@ -69,7 +69,7 @@ const DemoVideoModal = ({ isOpen, onClose }) => {
 
                     {/* Video Title Overlay */}
                     <div className="absolute bottom-6 left-6 text-white">
-                      <h3 className="text-2xl font-bold mb-2">FWC HRMS Demo</h3>
+                      <h3 className="text-2xl font-bold mb-2">Mastersolis Infotech Demo</h3>
                       <p className="text-white/80">See how our platform transforms HR operations</p>
                     </div>
                   </div>

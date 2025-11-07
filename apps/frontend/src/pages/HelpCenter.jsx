@@ -118,7 +118,7 @@ const HelpCenter = () => {
                 </div>
               </div>
               <div className="ml-4">
-                <h1 className="text-2xl font-bold text-gray-900">FWC HRMS</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Mastersolis Infotech</h1>
                 <p className="text-sm text-gray-500">Human Resource Management System</p>
               </div>
             </div>
@@ -135,7 +135,7 @@ const HelpCenter = () => {
               Help Center
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Find answers to common questions, browse helpful articles, and get the support you need to make the most of FWC HRMS.
+              Find answers to common questions, browse helpful articles, and get the support you need to make the most of Mastersolis Infotech.
             </p>
           </div>
 
@@ -277,7 +277,7 @@ const HelpCenter = () => {
                 Still Need Help?
               </h2>
               <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                Can't find what you're looking for? Our support team is here to help you get the most out of FWC HRMS.
+                Can't find what you're looking for? Our support team is here to help you get the most out of Mastersolis Infotech.
               </p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="text-center p-6 bg-gray-50 rounded-lg">

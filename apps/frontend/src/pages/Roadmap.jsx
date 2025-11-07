@@ -7,7 +7,7 @@ import Icon from '../components/UI/Icon'
 import { staggerContainer, itemFadeIn } from '../components/motionVariants'
 
 /**
- * Roadmap Page - FWC Design System
+ * Roadmap Page - Mastersolis Infotech Design System
  * Product roadmap and upcoming features
  */
 const Roadmap = () => {
@@ -129,7 +129,7 @@ const Roadmap = () => {
                 Product <span className="gradient-text">Roadmap</span>
               </h1>
               <p className="text-body-lg text-gray-600 max-w-3xl mx-auto">
-                Discover what's coming next for FWC HRMS. We're constantly innovating to bring you 
+                Discover what's coming next for Mastersolis Infotech. We're constantly innovating to bring you 
                 the most advanced HR solutions.
               </p>
             </motion.div>
@@ -208,7 +208,7 @@ const Roadmap = () => {
                 Upcoming Features
               </h2>
               <p className="text-body-lg text-gray-600 max-w-3xl mx-auto">
-                Exciting new features and capabilities coming to FWC HRMS in the near future.
+                Exciting new features and capabilities coming to Mastersolis Infotech in the near future.
               </p>
             </motion.div>
 

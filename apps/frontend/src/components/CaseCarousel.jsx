@@ -140,7 +140,7 @@ const CaseStudyItem = ({
 }
 
 /**
- * CaseCarousel Component - FWC Design System
+ * CaseCarousel Component - Mastersolis Infotech Design System
  * Accessible carousel with keyboard navigation and autoplay
  */
 const CaseCarousel = () => {
@@ -150,56 +150,43 @@ const CaseCarousel = () => {
 
   const caseStudies = [
     {
-      client: "TechCorp Solutions",
-      industry: "Technology",
-      summary: "Streamlined HR operations across 15 countries with our comprehensive platform, reducing administrative overhead by 40%.",
+      client: "AgroStream ERP",
+      industry: "Agriculture Technology",
+      summary: "Lead generation and ATS integration resulted in 3× more qualified applicants with AI-powered recruitment tools.",
       kpis: [
-        { value: "40%", label: "Cost Reduction" },
-        { value: "95%", label: "Employee Satisfaction" },
-        { value: "2.5x", label: "Faster Onboarding" }
+        { value: "3×", label: "Qualified Applicants" },
+        { value: "100%", label: "ATS Integration" },
+        { value: "AI-Powered", label: "Recruitment" }
       ],
-      testimonial: "FWC HRMS transformed our global HR operations. The platform's intuitive design and powerful analytics helped us make data-driven decisions that improved our entire workforce experience.",
-      author: "Sarah Johnson",
-      position: "Chief Human Resources Officer"
-    },
-    {
-      client: "Manufacturing Plus",
-      industry: "Manufacturing",
-      summary: "Implemented automated shift management and performance tracking for 5,000+ employees across multiple facilities.",
-      kpis: [
-        { value: "60%", label: "Time Savings" },
-        { value: "85%", label: "Match Rate" },
-        { value: "3 days", label: "Turnaround" }
-      ],
-      testimonial: "The shift management features alone saved us hundreds of hours per month. Our managers can now focus on strategic initiatives instead of administrative tasks.",
-      author: "Michael Chen",
-      position: "Operations Director"
-    },
-    {
-      client: "HealthFirst Medical",
-      industry: "Healthcare",
-      summary: "Enhanced compliance tracking and employee development programs, achieving 100% regulatory compliance across all locations.",
-      kpis: [
-        { value: "100%", label: "Compliance Rate" },
-        { value: "50%", label: "Training Efficiency" },
-        { value: "90%", label: "Retention Rate" }
-      ],
-      testimonial: "Compliance was always a challenge in healthcare. FWC HRMS made it seamless with automated tracking and real-time reporting that keeps us ahead of regulations.",
-      author: "Dr. Emily Rodriguez",
+      testimonial: "Mastersolis Infotech's AI ATS integration transformed our hiring process. We now receive 3× more qualified applicants and can process them efficiently with automated resume parsing and scoring.",
+      author: "Rajesh Kumar",
       position: "HR Director"
     },
     {
-      client: "FinanceFlow Inc",
-      industry: "Financial Services",
-      summary: "Automated performance reviews and goal tracking for 2,000+ employees, improving engagement and productivity metrics.",
+      client: "EduFlex LMS",
+      industry: "Education Technology",
+      summary: "Improved conversions by 18% using AI-optimized copy and content that resonates with our target audience.",
       kpis: [
-        { value: "35%", label: "Productivity Boost" },
-        { value: "92%", label: "Goal Achievement" },
-        { value: "25%", label: "Engagement Increase" }
+        { value: "18%", label: "Higher Conversions" },
+        { value: "AI-Optimized", label: "Content" },
+        { value: "Real-time", label: "Analytics" }
       ],
-      testimonial: "The performance management module revolutionized how we track and develop our talent. The AI insights help us identify high performers and development opportunities.",
-      author: "David Park",
-      position: "VP of Human Resources"
+      testimonial: "The AI-optimized content from Mastersolis Infotech increased our conversion rates by 18%. Their intelligent content generation understands our audience and creates compelling copy that converts.",
+      author: "Priya Sharma",
+      position: "Marketing Director"
+    },
+    {
+      client: "FinTrack Dashboard",
+      industry: "Financial Technology",
+      summary: "AI-summarized analytics reduced support queries by 40% with intelligent insights and automated reporting.",
+      kpis: [
+        { value: "40%", label: "Fewer Support Queries" },
+        { value: "AI Summaries", label: "Analytics" },
+        { value: "Real-time", label: "Insights" }
+      ],
+      testimonial: "The AI analytics summaries from Mastersolis Infotech reduced our support queries by 40%. Users can now understand complex data at a glance, making our dashboard more intuitive and valuable.",
+      author: "Amit Patel",
+      position: "Product Manager"
     }
   ]
 
