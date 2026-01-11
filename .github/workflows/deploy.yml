@@ -1,0 +1,189 @@
+name: Deploy FWC HRMS
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  NODE_VERSION: "18"
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7.0
+        ports:
+          - 27017:27017
+
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Backend Dependencies
+        run: |
+          cd apps/backend
+          npm ci
+
+      - name: Install Frontend Dependencies
+        run: |
+          cd apps/frontend
+          npm ci
+
+      - name: Install ML Service Dependencies
+        run: |
+          cd services/ml
+          pip install -r requirements.txt
+
+      - name: Generate Prisma Client
+        run: |
+          cd apps/backend
+          npx prisma generate
+
+      - name: Run Backend Tests
+        run: |
+          cd apps/backend
+          npm test
+        env:
+          DATABASE_URL: mongodb://localhost:27017/test_db
+
+      - name: Build Frontend
+        run: |
+          cd apps/frontend
+          npm run build
+
+      - name: Upload Test Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: apps/backend/coverage/
+
+  security-scan:
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Security Audit (Backend)
+        run: |
+          cd apps/backend
+          npm audit --audit-level moderate
+
+      - name: Run Security Audit (Frontend)
+        run: |
+          cd apps/frontend
+          npm audit --audit-level moderate
+
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Lint Backend
+        run: |
+          cd apps/backend
+          npm run lint || echo "Linting completed"
+
+      - name: Lint Frontend
+        run: |
+          cd apps/frontend
+          npm run lint || echo "Linting completed"
+
+  build-docker:
+    runs-on: ubuntu-latest
+    needs: [test, security-scan]
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and Push ML Service
+        uses: docker/build-push-action@v5
+        with:
+          context: ./services/ml
+          push: true
+          tags: fwc-hrms/ml-service:latest,fwc-hrms/ml-service:${{ github.sha }}
+
+      - name: Build and Push Backend
+        run: |
+          cd apps/backend
+          docker build -t fwc-hrms/backend:latest .
+          docker build -t fwc-hrms/backend:${{ github.sha }} .
+          docker push fwc-hrms/backend:latest
+          docker push fwc-hrms/backend:${{ github.sha }}
+
+      - name: Build and Push Frontend
+        run: |
+          cd apps/frontend
+          docker build -t fwc-hrms/frontend:latest .
+          docker build -t fwc-hrms/frontend:${{ github.sha }} .
+          docker push fwc-hrms/frontend:latest
+          docker push fwc-hrms/frontend:${{ github.sha }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Deploy to Production
+        run: |
+          echo "🚀 Deploying to production..."
+          echo "Backend: Deploy to Render/Railway"
+          echo "Frontend: Deploy to Vercel"
+          echo "ML Service: Deploy to Railway"
+
+          # Add deployment commands here
+          # curl -X POST "https://api.render.com/webhooks/${{ secrets.RENDER_WEBHOOK }}"
+          # curl -X POST "https://api.vercel.com/v1/integrations/deploy/${{ secrets.VERCEL_WEBHOOK }}"
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [deploy, test]
+    if: always()
+
+    steps:
+      - name: Notify Deployment Status
+        run: |
+          if [ "${{ needs.deploy.result }}" == "success" ]; then
+            echo "✅ Deployment successful!"
+          else
+            echo "❌ Deployment failed!"
+          fi

@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: fwc-hrms-mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: HRMS
+    volumes:
+      - mongodb_data:/data/db
+      - ./scripts/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+      - hrms-network
+
+  backend:
+    build: ./apps/backend
+    container_name: fwc-hrms-backend
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - DATABASE_URL=mongodb://admin:password123@mongodb:27017/HRMS?authSource=admin
+      - JWT_SECRET=fwc-hrms-super-secret-jwt-key-2024
+      - JWT_REFRESH_SECRET=fwc-hrms-super-secret-refresh-key-2024
+      - JWT_EXPIRES_IN=15m
+      - JWT_REFRESH_EXPIRES_IN=7d
+      - FRONTEND_URL=http://localhost:5174
+    volumes:
+      - backend_uploads:/app/uploads
+    networks:
+      - hrms-network
+    depends_on:
+      - mongodb
+
+  frontend:
+    build: ./apps/frontend
+    container_name: fwc-hrms-frontend
+    restart: unless-stopped
+    ports:
+      - "5174:5174"
+    environment:
+      - VITE_API_URL=http://localhost:3001/api
+    networks:
+      - hrms-network
+    depends_on:
+      - backend
+
+  ml-service:
+    build: ./services/ml
+    container_name: fwc-hrms-ml
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - hrms-network
+    depends_on:
+      - mongodb
+
+networks:
+  hrms-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+  backend_uploads:
