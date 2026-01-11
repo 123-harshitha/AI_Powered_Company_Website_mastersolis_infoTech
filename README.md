@@ -10,9 +10,9 @@
 
 [![Docker](https://img.shields.io/badge/Docker-Supported-blue)](https://www.docker.com/)
 
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?logo=github)](https://github.com/PriyankaGowda2005/CICADA-HACK)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?logo=github)]
 
-> **🚀 Live Repository**: [https://github.com/PriyankaGowda2005/CICADA-HACK](https://github.com/PriyankaGowda2005/CICADA-HACK)
+> **🚀 Live Repository**: (https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git)
 
 A comprehensive, production-ready Human Resource Management System built with modern web technologies. Features real-time updates, role-based access control, AI-powered features, and a mobile-responsive design.
 
@@ -187,7 +187,7 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/PriyankaGowda2005/CICADA-HACK.git
+git clone (https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git)
 cd CICADA-HACK
 
 # Copy environment variables
@@ -205,7 +205,7 @@ docker-compose up -d
 
 ```bash
 # Clone the repository
-git clone https://github.com/PriyankaGowda2005/CICADA-HACK.git
+git clone https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git
 cd CICADA-HACK
 
 # Install root dependencies
@@ -631,11 +631,11 @@ sudo systemctl start nginx
 
 We welcome contributions! Please follow these guidelines:
 
-> **📁 Repository**: [https://github.com/PriyankaGowda2005/CICADA-HACK](https://github.com/PriyankaGowda2005/CICADA-HACK)
+> **📁 Repository**: https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git
 
 ### Development Workflow
 
-1. **Fork the repository** from [GitHub](https://github.com/PriyankaGowda2005/CICADA-HACK)
+1. **Fork the repository** from [GitHub](https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git)
 
 2. **Create a feature branch**
 
@@ -695,7 +695,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Documentation**: Check this README and inline code documentation
 - **Issues**: Open an issue on [GitHub](https://github.com/PriyankaGowda2005/CICADA-HACK/issues) for bugs or feature requests
 - **Discussions**: Use [GitHub Discussions](https://github.com/PriyankaGowda2005/CICADA-HACK/discussions) for questions and ideas
-- **Repository**: [https://github.com/PriyankaGowda2005/CICADA-HACK](https://github.com/PriyankaGowda2005/CICADA-HACK)
+- **Repository**: https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git
 - **Email**: Contact the development team at support@mastersolis.com
 
 ### Common Issues
@@ -751,6 +751,6 @@ npm run build
 
 **Built with ❤️ by the Mastersolis Infotech Development Team**
 
-🔗 **GitHub Repository**: [https://github.com/PriyankaGowda2005/CICADA-HACK](https://github.com/PriyankaGowda2005/CICADA-HACK)
+🔗 **GitHub Repository**: https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git
 
 For more information, visit our [website](https://mastersolis.com) or contact us at [info@mastersolis.com](mailto:info@mastersolis.com).
