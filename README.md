@@ -12,7 +12,7 @@
 
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-black?logo=github)]
 
-> **🚀 Live Repository**: [https://github.com/PriyankaGowda2005/CICADA-HACK][(https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git)
+> **🚀 Live Repository**: (https://github.com/123-harshitha/AI_Powered_Company_Website_mastersolis_infoTech.git)
 
 A comprehensive, production-ready Human Resource Management System built with modern web technologies. Features real-time updates, role-based access control, AI-powered features, and a mobile-responsive design.
 
